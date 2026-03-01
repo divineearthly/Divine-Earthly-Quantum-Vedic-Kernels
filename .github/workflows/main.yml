@@ -1,4 +1,3 @@
-
 name: Divine Earthly CI
 on: [push]
 jobs:
@@ -9,7 +8,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y python3-pybind11 cmake g++
+          sudo apt-get install -y python3-dev pybind11-dev cmake g++
       - name: Compile Unified Optimized C++ Kernel
         run: |
           g++ -O3 -Wall -shared -std=c++17 -fPIC $(python3 -m pybind11 --includes) kernel.cpp -o vedic_kernels$(python3-config --extension-suffix)
