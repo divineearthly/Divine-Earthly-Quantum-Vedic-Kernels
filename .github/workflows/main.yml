@@ -11,6 +11,11 @@ jobs:
           sudo apt-get install -y python3-dev pybind11-dev cmake g++
       - name: Compile Unified Optimized C++ Kernel
         run: |
-          g++ -O3 -Wall -shared -std=c++17 -fPIC $(python3 -m pybind11 --includes) kernel.cpp -o vedic_kernels$(python3-config --extension-suffix)
+          # Use python3-config to get the correct ABI suffix for the shared library
+          SUFFIX=$(python3-config --extension-suffix)
+          g++ -O3 -Wall -shared -std=c++17 -fPIC $(python3 -m pybind11 --includes) kernels/nikhilam_kernel.cpp -o vedic_kernels${SUFFIX}
       - name: Basic Import Test
-        run: python3 -c "import vedic_kernels; print('Kernel Loaded Successfully')"
+        run: |
+          # Ensure the current directory is in the path for the import test
+          export PYTHONPATH=$PYTHONPATH:.
+          python3 -c "import vedic_kernels; print('Kernel Loaded Successfully')"
