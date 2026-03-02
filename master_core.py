@@ -47,3 +47,11 @@ def select_sutra(sector):
     if sector == 'Health': return 'Urdhva_Tiryak'
     if sector == 'Space': return 'Calana_Kalanabhyam'
     return 'Nikhilam'
+
+# --- UNIVERSAL SUTRA LIBRARY LOADED ---
+SUTRA_LIBRARY = {'Nikhilam': 'Optimization for Large Prime Factorization (Cybersecurity/Quantum Keys)', 'Urdhva_Tiryak': 'Parallel Matrix Multiplication (DNA Sequencing/MRI Imaging)', 'Paravartya': 'Unitary Matrix Inversion (Smart Grid/Energy Flow)', 'Ekadhikena': 'Recursive Probability (Financial Markets/Risk)', 'Calana_Kalanabhyam': 'Differential Flux Calculations (Satellite/Space)', 'Shunyam_Samuccaye': 'Wave Function Collapse Optimization (Logistics)'}
+def select_sutra(sector):
+    if sector == 'Health': return 'Urdhva_Tiryak'
+    if sector == 'Space': return 'Calana_Kalanabhyam'
+    if sector == 'Agriculture': return 'Ekadhikena'
+    return 'Nikhilam'
