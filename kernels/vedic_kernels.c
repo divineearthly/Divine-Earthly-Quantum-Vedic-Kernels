@@ -1,6 +1,10 @@
 
 #include <stddef.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Portable implementation of the Vedic-Quantum reconstruction kernel
 void reconstruct_kernel(const double* X, const double* Y, const double* Z, 
                         double* out, size_t n, 
@@ -10,7 +14,7 @@ void reconstruct_kernel(const double* X, const double* Y, const double* Z,
     }
 }
 
-// Added the missing symbol required by the C++ unified library
+// Explicitly exported symbol for the C++ unified library
 void urdhva_3x3_matmul_c(const double* A, const double* B, double* C) {
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
@@ -22,3 +26,7 @@ void urdhva_3x3_matmul_c(const double* A, const double* B, double* C) {
         }
     }
 }
+
+#ifdef __cplusplus
+}
+#endif
