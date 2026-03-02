@@ -20,7 +20,11 @@ public:
                                                                                                                         // Logic for 'Transpose and Apply'
                                                                                                                                     // Optimized for solving simultaneous linear equations.
                                                                                                                                                 std::cout << "Integrating Paravartya Yojayet for Multidimensional Equation Resolution..." << std::endl;
-                                                                                                                                                        }
+                                                                                                                                                        } else if (sutra_name == "Vyavakalana") {
+                                                                                                                                                                    // Logic for 'Subtraction/Differentiation'
+                                                                                                                                                                                // Optimized for error correction and difference analysis.
+                                                                                                                                                                                            std::cout << "Integrating Vyavakalana for Error Correction and Difference Analysis..." << std::endl;
+                                                                                                                                                                                                    }
                                                                                                                 }
 };
 
@@ -31,5 +35,7 @@ int main() {
     ExpansionEngine::integrate_new_formula("Ekadhikena_Purvena");
     // Integrating 'Antyayoreva'
     ExpansionEngine::integrate_new_formula("Antyayoreva");
+    // Integrating 'Vyavakalana'
+    ExpansionEngine::integrate_new_formula("Vyavakalana");
     return 0;
 }
