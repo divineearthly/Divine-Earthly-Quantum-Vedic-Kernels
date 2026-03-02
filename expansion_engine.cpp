@@ -18,5 +18,11 @@ public:
                                                                                                     std::cout << "Integrating Antyayoreva for Quantum Polynomial Reduction..." << std::endl;
                                                                                                             }
                                                                                                                 }
-                                                                                                                };
-                                                                                                                
+};
+
+int main() {
+    ExpansionEngine::integrate_new_formula("Ekadhikena_Purvena");
+    // You can add more calls here to test other sutras
+    // ExpansionEngine::integrate_new_formula("Antyayoreva");
+    return 0;
+}
