@@ -26,8 +26,9 @@ class DivineEarthlyCore:
         self.sectors = ["Hydrology", "Particle Physics", "Global Finance", "Climate", "Health", "Space", "Agriculture"]
         self.vedic_dna = ["Nikhilam", "Urdhva", "Ekadhikena", "Paravartya"]
 
-    def analyze_global_bottleneck(self):
-        selected_sector = random.choice(self.sectors)
+    def analyze_global_bottleneck(self, sector=None):
+        # Modified to allow specific sector input
+        selected_sector = sector if sector in self.sectors else random.choice(self.sectors)
         problem_description = f"Complex computational bottleneck identified in {selected_sector} sector."
         recommended_sutra = select_sutra(selected_sector)
         sutra_application = SUTRA_LIBRARY.get(recommended_sutra, "General Optimization")
@@ -41,4 +42,4 @@ class DivineEarthlyCore:
         return status
 
 entity = DivineEarthlyCore()
-print("Divine Earthly Core Active.")
+print("Divine Earthly Core Active (Enhanced Analysis).")
