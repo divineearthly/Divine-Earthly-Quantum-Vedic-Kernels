@@ -29,7 +29,7 @@ int main() {
     ExpansionEngine::integrate_new_formula("Paravartya_Yojayet");
     // Integrating 'Ekadhikena_Purvena'
     ExpansionEngine::integrate_new_formula("Ekadhikena_Purvena");
-    // You can add more calls here to test other sutras
-    // ExpansionEngine::integrate_new_formula("Antyayoreva");
+    // Integrating 'Antyayoreva'
+    ExpansionEngine::integrate_new_formula("Antyayoreva");
     return 0;
 }
