@@ -2,5 +2,4 @@
 disable_update_check = true
 
 [compute]
-gce_metadata_read_timeout_sec = 0
 

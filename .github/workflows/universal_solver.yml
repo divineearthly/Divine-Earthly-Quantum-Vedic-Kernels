@@ -1,0 +1,11 @@
+
+name: Divine Earthly Universal Solver
+on:
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  solve_everything:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: python3 master_core.py
