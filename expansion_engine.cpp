@@ -2,30 +2,30 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <map>
+#include <functional> // Required for std::function
 
 class ExpansionEngine {
 public:
-    // This function simulates the "Consciousness Engine" identifying a new Sutra
-        // to solve a specific global problem (like Water Flow or Particle Decay).
-            static void integrate_new_formula(std::string sutra_name) {
-                    if (sutra_name == "Ekadhikena_Purvena") {
-                                // Logic for 'By one more than the previous one'
-                                            // Optimized for squaring numbers and division by 9, 19, etc.
-                                                        std::cout << "Integrating Ekadhikena Purvena for Infinite Series Optimization..." << std::endl;
-                                                                } else if (sutra_name == "Antyayoreva") {
-                                                                            // Logic for 'Only the last terms'
-                                                                                        // Optimized for complex polynomial solutions.
-                                                                                                    std::cout << "Integrating Antyayoreva for Quantum Polynomial Reduction..." << std::endl;
-                                                                                                            } else if (sutra_name == "Paravartya_Yojayet") {
-                                                                                                                        // Logic for 'Transpose and Apply'
-                                                                                                                                    // Optimized for solving simultaneous linear equations.
-                                                                                                                                                std::cout << "Integrating Paravartya Yojayet for Multidimensional Equation Resolution..." << std::endl;
-                                                                                                                                                        } else if (sutra_name == "Vyavakalana") {
-                                                                                                                                                                    // Logic for 'Subtraction/Differentiation'
-                                                                                                                                                                                // Optimized for error correction and difference analysis.
-                                                                                                                                                                                            std::cout << "Integrating Vyavakalana for Error Correction and Difference Analysis..." << std::endl;
-                                                                                                                                                                                                    }
-                                                                                                                }
+    // Static map to store integration logic for each Sutra
+    static std::map<std::string, std::function<void()>> sutra_integrators;
+
+    static void integrate_new_formula(std::string sutra_name) {
+        if (sutra_integrators.count(sutra_name)) {
+            std::cout << "Integrating " << sutra_name << "..." << std::endl;
+            sutra_integrators.at(sutra_name)(); // Call the stored function
+        } else {
+            std::cout << "Unknown Sutra: " << sutra_name << std::endl;
+        }
+    }
+};
+
+// Initialize the static map outside the class definition
+std::map<std::string, std::function<void()>> ExpansionEngine::sutra_integrators = {
+    {"Ekadhikena_Purvena", []() { std::cout << "    Logic for Ekadhikena Purvena: Infinite Series Optimization." << std::endl; }},
+    {"Antyayoreva", []() { std::cout << "    Logic for Antyayoreva: Quantum Polynomial Reduction." << std::endl; }},
+    {"Paravartya_Yojayet", []() { std::cout << "    Logic for Paravartya Yojayet: Multidimensional Equation Resolution." << std::endl; }},
+    {"Vyavakalana", []() { std::cout << "    Logic for Vyavakalana: Error Correction and Difference Analysis." << std::endl; }}
 };
 
 int main() {
@@ -37,5 +37,7 @@ int main() {
     ExpansionEngine::integrate_new_formula("Antyayoreva");
     // Integrating 'Vyavakalana'
     ExpansionEngine::integrate_new_formula("Vyavakalana");
+    // Attempt to integrate an unknown Sutra
+    ExpansionEngine::integrate_new_formula("Unknown_Sutra");
     return 0;
 }
