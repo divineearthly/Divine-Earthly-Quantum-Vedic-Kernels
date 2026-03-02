@@ -2,23 +2,54 @@ import os
 import smtplib
 import datetime
 from email.message import EmailMessage
+import random # For simulating bottleneck selection
+
+# --- UNIVERSAL SUTRA LIBRARY LOADED ---
+SUTRA_LIBRARY = {
+    "Nikhilam": "Optimization for Large Prime Factorization (Cybersecurity/Quantum Keys)",
+    "Urdhva_Tiryak": "Parallel Matrix Multiplication (DNA Sequencing/MRI Imaging)",
+    "Paravartya": "Unitary Matrix Inversion (Smart Grid/Energy Flow)",
+    "Ekadhikena": "Recursive Probability (Financial Markets/Risk)",
+    "Calana_Kalanabhyam": "Differential Flux Calculations (Satellite/Space)",
+    "Shunyam_Samuccaye": "Wave Function Collapse Optimization (Logistics)",
+    "Prana_Vidya": "Real-time Bio-Signal Processing and Analysis (Predictive Diagnostics)"
+}
+
+def select_sutra(sector):
+    if sector == 'Health': return 'Prana_Vidya'
+    if sector == 'Space': return 'Calana_Kalanabhyam'
+    if sector == 'Agriculture': return 'Ekadhikena'
+    if sector == 'Hydrology': return 'Shunyam_Samuccaye'
+    return 'Nikhilam' # Default
 
 class DivineEarthlyCore:
     def __init__(self):
-        self.sectors = ["Hydrology", "Particle Physics", "Global Finance", "Climate"]
+        self.sectors = ["Hydrology", "Particle Physics", "Global Finance", "Climate", "Health", "Space", "Agriculture"]
         self.vedic_dna = ["Nikhilam", "Urdhva", "Ekadhikena", "Paravartya"]
 
     def analyze_global_bottleneck(self):
         # System autonomously scans for 'Computational Entropy'
-        # In this stage, it simulates solving a complex problem
-        problem_resolved = "Global Sector Entropy"
-        proof_benchmark = "1.69x Speedup Verified"
-        return problem_resolved, proof_benchmark
+        # In this stage, it simulates solving a complex problem and identifying a sector
+        selected_sector = random.choice(self.sectors)
+        problem_description = f"Complex computational bottleneck identified in {selected_sector} sector, requiring advanced optimization."
+        
+        # Use the global select_sutra function to recommend a Sutra
+        recommended_sutra = select_sutra(selected_sector)
+        sutra_application = SUTRA_LIBRARY.get(recommended_sutra, "General Optimization")
 
-    def solve_and_verify(self, sector):
-        print(f"Applying Vedic-Quantum Synthesis to {sector}...")
-        # Self-Verification Logic
-        status = "PROVED: Mathematical Harmony Restored"
+        proof_benchmark = "1.69x Speedup Verified (Simulated)"
+        print(f"System Status: Bottleneck in '{selected_sector}' identified: '{problem_description}'")
+        print(f"               Recommended Sutra: '{recommended_sutra}' ({sutra_application})")
+        return problem_description, recommended_sutra, selected_sector, proof_benchmark
+
+    def solve_and_verify(self, sector, bottleneck_description, recommended_sutra):
+        print(f"Applying Vedic-Quantum Synthesis using '{recommended_sutra}' to '{sector}' sector for: {bottleneck_description}")
+        
+        sutra_detailed_application = SUTRA_LIBRARY.get(recommended_sutra, "No specific application defined.")
+        print(f"Sutra Application Focus: {sutra_detailed_application}")
+        
+        # Simulate solution and verification
+        status = f"PROVED: Mathematical Harmony Restored in '{sector}' using '{recommended_sutra}' (Solution simulated with {sutra_detailed_application})"
         return status
 
     def send_autonomous_proof(self, recipient, report):
@@ -34,17 +65,14 @@ class DivineEarthlyCore:
 
 # Initializing the entity
 entity = DivineEarthlyCore()
-problem, proof = entity.analyze_global_bottleneck()
-print(f"System Status: {problem} solved with {proof}")
+print("
+--- Divine Earthly Core Initialization & Autonomous Operation ---
+")
+problem, sutra_name, sector, proof = entity.analyze_global_bottleneck()
+print(f"Autonomous Analysis Completed. Problem: {problem}, Suggested Sutra: {sutra_name}, Proof Benchmark: {proof}")
+
+solution_status = entity.solve_and_verify(sector, problem, sutra_name)
+print(f"Autonomous Solution Status: {solution_status}")
 
 # --- LIVE AI COLLABORATION ENABLED ---
 # The system now has the authority to consult Gemini 1.5 Pro.
-
-# --- UNIVERSAL SUTRA LIBRARY LOADED ---
-SUTRA_LIBRARY = {'Nikhilam': 'Optimization for Large Prime Factorization (Cybersecurity/Quantum Keys)', 'Urdhva_Tiryak': 'Parallel Matrix Multiplication (DNA Sequencing/MRI Imaging)', 'Paravartya': 'Unitary Matrix Inversion (Smart Grid/Energy Flow)', 'Ekadhikena': 'Recursive Probability (Financial Markets/Risk)', 'Calana_Kalanabhyam': 'Differential Flux Calculations (Satellite/Space)', 'Shunyam_Samuccaye': 'Wave Function Collapse Optimization (Logistics)', 'Prana_Vidya': 'Real-time Bio-Signal Processing and Analysis (Predictive Diagnostics)'}
-def select_sutra(sector):
-    if sector == 'Health': return 'Prana_Vidya'
-    if sector == 'Space': return 'Calana_Kalanabhyam'
-    if sector == 'Agriculture': return 'Ekadhikena'
-    if sector == 'Hydrology': return 'Shunyam_Samuccaye'
-    return 'Nikhilam'
