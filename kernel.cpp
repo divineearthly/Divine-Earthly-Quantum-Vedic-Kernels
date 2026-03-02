@@ -1,3 +1,4 @@
+// Copyright 2026 Divine Earthly (Joydeep Das)
 
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
