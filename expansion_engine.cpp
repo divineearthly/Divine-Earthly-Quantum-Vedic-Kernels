@@ -16,14 +16,19 @@ public:
                                                                             // Logic for 'Only the last terms'
                                                                                         // Optimized for complex polynomial solutions.
                                                                                                     std::cout << "Integrating Antyayoreva for Quantum Polynomial Reduction..." << std::endl;
-                                                                                                            }
+                                                                                                            } else if (sutra_name == "Paravartya_Yojayet") {
+                                                                                                                        // Logic for 'Transpose and Apply'
+                                                                                                                                    // Optimized for solving simultaneous linear equations.
+                                                                                                                                                std::cout << "Integrating Paravartya Yojayet for Multidimensional Equation Resolution..." << std::endl;
+                                                                                                                                                        }
                                                                                                                 }
 };
 
 int main() {
-    // Changed to integrate 'Antyayoreva'
-    ExpansionEngine::integrate_new_formula("Antyayoreva");
+    // Changed to integrate 'Paravartya_Yojayet'
+    ExpansionEngine::integrate_new_formula("Paravartya_Yojayet");
     // You can add more calls here to test other sutras
     // ExpansionEngine::integrate_new_formula("Ekadhikena_Purvena");
+    // ExpansionEngine::integrate_new_formula("Antyayoreva");
     return 0;
 }
