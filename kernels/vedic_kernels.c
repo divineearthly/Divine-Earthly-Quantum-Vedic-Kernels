@@ -27,15 +27,12 @@ void urdhva_3x3_matmul_c(const double* A, const double* B, double* C) {
     }
 }
 
-// Symbol for Paravartya Yojayet matrix inversion (added to fix current linker error)
+// Symbol for Paravartya Yojayet matrix inversion
 void paravartya_3x3_inverse_c(const double* A, double* invA) {
-    // Implementing a basic 3x3 determinant and adjugate-based inverse
     double det = A[0]*(A[4]*A[8] - A[5]*A[7]) - 
                  A[1]*(A[3]*A[8] - A[5]*A[6]) + 
                  A[2]*(A[3]*A[7] - A[4]*A[6]);
-    
     double invDet = (det != 0) ? 1.0 / det : 0;
-
     invA[0] = (A[4]*A[8] - A[5]*A[7]) * invDet;
     invA[1] = (A[2]*A[7] - A[1]*A[8]) * invDet;
     invA[2] = (A[1]*A[5] - A[2]*A[4]) * invDet;
@@ -45,6 +42,13 @@ void paravartya_3x3_inverse_c(const double* A, double* invA) {
     invA[6] = (A[3]*A[7] - A[4]*A[6]) * invDet;
     invA[7] = (A[6]*A[1] - A[0]*A[7]) * invDet;
     invA[8] = (A[0]*A[4] - A[3]*A[1]) * invDet;
+}
+
+// Symbol for Nikhilam base shifting (added to fix current linker error)
+void nikhilam_base_shift_c(double* data, size_t n, double shift) {
+    for (size_t i = 0; i < n; ++i) {
+        data[i] += shift;
+    }
 }
 
 #ifdef __cplusplus
