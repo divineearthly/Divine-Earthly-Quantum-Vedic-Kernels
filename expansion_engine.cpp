@@ -21,9 +21,9 @@ public:
 };
 
 int main() {
-    // Changed to integrate 'Antyayoreva'
-    ExpansionEngine::integrate_new_formula("Antyayoreva");
+    // Changed to integrate 'Ekadhikena_Purvena'
+    ExpansionEngine::integrate_new_formula("Ekadhikena_Purvena");
     // You can add more calls here to test other sutras
-    // ExpansionEngine::integrate_new_formula("Ekadhikena_Purvena");
+    // ExpansionEngine::integrate_new_formula("Antyayoreva");
     return 0;
 }
