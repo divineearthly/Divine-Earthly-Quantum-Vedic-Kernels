@@ -16,13 +16,15 @@ class DivineEarthlyCore:
 
         # 3. REPORT
         with open("DAILY_LAUNCH_POST.md", "a") as f:
-            f.write(f"
+            f.write(f'
 
 ### [Eclipse Update] Live Data Analysis
-")
-            f.write(f"Vedic-Quantum Efficiency: {result:.4f}
-")
-            f.write(f"NASA/ISRO Sync Status: 🟢 Connected")
+')
+            f.write(f'Vedic-Quantum Efficiency: {result:.4f}
+')
+            f.write(f'NASA/ISRO Sync Status: 🟢 Connected
+') # Added 
+ for consistency
 
         print("✅ Autonomous Cycle Complete.")
 
