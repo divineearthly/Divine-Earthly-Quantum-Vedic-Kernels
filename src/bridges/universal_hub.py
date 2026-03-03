@@ -1,11 +1,12 @@
 
 import os
+from google.colab import userdata # Import userdata to access Colab secrets
 
 class UniversalHub:
     def __init__(self):
         # Contact List for External Intelligence
         self.connections = {
-            'Gemini': os.getenv('GEMINI_API_KEY'),
+            'Gemini': userdata.get('GEMINI_API_KEY'), # Use userdata.get()
             'OpenAI': os.getenv('OPENAI_API_KEY'),
             'Anthropic': os.getenv('ANTHROPIC_API_KEY'),
             'NASA': os.getenv('NASA_API_KEY')
