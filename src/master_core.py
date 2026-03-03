@@ -1,4 +1,3 @@
-
 from bridges.planetary_data import PlanetaryDataBridge
 
 class DivineEarthlyCore:
@@ -16,15 +15,9 @@ class DivineEarthlyCore:
 
         # 3. REPORT
         with open("DAILY_LAUNCH_POST.md", "a") as f:
-            f.write(f'
-
-### [Eclipse Update] Live Data Analysis
-')
-            f.write(f'Vedic-Quantum Efficiency: {result:.4f}
-')
-            f.write(f'NASA/ISRO Sync Status: 🟢 Connected
-') # Added 
- for consistency
+            f.write(f'\n\n### [Eclipse Update] Live Data Analysis\n')
+            f.write(f'Vedic-Quantum Efficiency: {result:.4f}\n')
+            f.write(f'NASA/ISRO Sync Status: 🟢 Connected\n')
 
         print("✅ Autonomous Cycle Complete.")
 
