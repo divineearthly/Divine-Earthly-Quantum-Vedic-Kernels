@@ -8,6 +8,15 @@ extern "C" {
     long long urdhva_tiryak_fast(int a, int b) {
             // Implementation of Vedic 'Crosswise' logic at the CPU level
                     return (long long)a * b;
-                        }
-                        }
+    }
+
+    long long vedic_add(int a, int b) {
+        return (long long)a + b;
+    }
+
+    long long vedic_subtract(int a, int b) {
+        return (long long)a - b;
+    }
+
+}
                         
