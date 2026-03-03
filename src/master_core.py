@@ -17,7 +17,7 @@ class DivineEarthlyCore:
         flow_index = soil_moisture_val * 0.75 # Simple multiplication as an example
 
         # 3. REPORT
-        with open("DAILY_LAUNCH_POST.md", "a") as f:
+        with open("DAILY_LAUNCH_POST.md", "w") as f:
             f.write(f'\n\n### [Eclipse Update] Live Data Analysis\n')
             f.write(f'Vedic-Quantum Efficiency: {result:.4f}\n')
             f.write(f'Soil Moisture (Silchar): {data['soil_moisture_silchar']}\n')
