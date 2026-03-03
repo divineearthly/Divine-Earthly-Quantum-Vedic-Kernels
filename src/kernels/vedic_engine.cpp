@@ -17,6 +17,4 @@ extern "C" {
     long long vedic_subtract(int a, int b) {
         return (long long)a - b;
     }
-
 }
-                        
