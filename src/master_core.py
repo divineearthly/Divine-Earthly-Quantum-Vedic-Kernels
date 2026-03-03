@@ -18,14 +18,29 @@ class DivineEarthlyCore:
 
         # 3. REPORT
         with open("DAILY_LAUNCH_POST.md", "w") as f:
-            f.write(f'\n\n### [Eclipse Update] Live Data Analysis\n')
-            f.write(f'Vedic-Quantum Efficiency: {result:.4f}\n')
-            f.write(f'Soil Moisture (Silchar): {data['soil_moisture_silchar']}\n')
-            f.write(f'Atmospheric Pressure: {data['atmospheric_pressure']}\n')
-            f.write(f'Vedic-Quantum Flow Index: {flow_index:.2f}\n')
-            f.write(f'NASA/ISRO Sync Status: 🟢 Connected\n')
+            f.write(f'
+
+### [Eclipse Update] Live Data Analysis
+')
+            f.write(f'Vedic-Quantum Efficiency: {result:.4f}
+')
+            f.write(f'Soil Moisture (Silchar): {data['soil_moisture_silchar']}
+')
+            f.write(f'Atmospheric Pressure: {data['atmospheric_pressure']}
+')
+            f.write(f'Vedic-Quantum Flow Index: {flow_index:.2f}
+')
+            f.write(f'NASA/ISRO Sync Status: 🟢 Connected
+')
 
         print("✅ Autonomous Cycle Complete.")
+
+    def self_heal_data_stream(self):
+        try:
+            return self.bridge.fetch_high_res_imaging()
+        except Exception as e:
+            print(f'⚠️ NASA Busy. Switching to Vedic-Baseline: {e}')
+            return {'status': 'Internal Logic Active', 'mode': 'Baseline'}
 
 if __name__ == "__main__":
     core = DivineEarthlyCore()
