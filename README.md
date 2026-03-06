@@ -24,7 +24,7 @@ make clean && make
 chmod +x verify_json.sh
 ./verify_json.sh
 🎥 Technical Walkthrough
-Watch the Divine Earthly Build & Verification Videohttps://drive.google.com/file/d/16orWMHfBFpwFvERX9nXrV2beNTTfM-4j/view?usp=drivesdk
+Watch the Divine Earthly Build & Verification Video https://drive.google.com/file/d/16orWMHfBFpwFvERX9nXrV2beNTTfM-4j/view?usp=drivesdk
 Founder: Joydeep Das | Co-Founder: Prince Kumar Tiwari
 Location: Silchar, Assam, India
 Contact: divineearthly@gmail.com '''
