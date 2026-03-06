@@ -1,135 +1,88 @@
-import cmath
+import numpy as np
 
-def vedic_complex_multiply(z1, z2):
+def _vedic_real_mul(a, b):
     """
-    Implements complex number multiplication using the 'Urdhva Tiryagbhyam'
-    (Vertically and Crosswise) Vedic Sutra principle.
+    A conceptual implementation of real number multiplication inspired by Vedic Math Sutras.
+    For arbitrary floating-point numbers, directly applying digit-based Vedic Sutras
+    (like 'Urdhva Tiryagbhyam' or 'Nikhilam Navatashcaramam Dashatah') for computational
+    speedup over native floating-point operations is not standard or practical.
+    Vedic Sutras are primarily designed for integer arithmetic, often simplifying
+    mental calculations or pen-and-paper methods for specific number forms.
 
-    For two complex numbers z1 = (a + bi) and z2 = (c + di):
-    The product is (ac - bd) + (ad + bc)i.
-    This function explicitly computes these intermediate products (ac, bd, ad, bc)
-    and combines them, reflecting the structured approach of the Sutra.
-    For standard floating-point numbers, this is primarily illustrative and
-    not a performance optimization over native complex multiplication.
+    This function serves to represent the application of a Sutra to individual
+    real number products conceptually. In a hypothetical scenario where 'a' and 'b'
+    could be decomposed into integer-like parts (e.g., fixed-point arithmetic)
+    that align with Vedic methods, specific Sutra logic could be implemented here.
+    For this general floating-point context, it simply performs the standard multiplication,
+    implying that a Vedic method was conceptually invoked.
+    """
+    return a * b
+
+def _vedic_complex_mul(z1, z2):
+    """
+    Performs complex multiplication (z1 * z2) using an approach where each
+    real number multiplication involved (ac, bd, ad, bc) is conceptually handled
+    by a Vedic Math-inspired method (_vedic_real_mul).
+
+    Given z1 = a + bi and z2 = c + di, the product is (ac - bd) + (ad + bc)i.
+    The 'optimization' here refers to the conceptual application of a Vedic Sutra
+    (e.g., Urdhva Tiryagbhyam - "Vertically and Crosswise" applied to digits
+    of a number if 'a', 'b', 'c', 'd' were integers or fixed-point numbers)
+    to compute the intermediate real products.
     """
     a, b = z1.real, z1.imag
     c, d = z2.real, z2.imag
 
-    # Vertical products for real part components
-    ac = a * c
-    bd = b * d
+    # Apply conceptual Vedic multiplication for each of the four real products
+    # that constitute the complex product.
+    ac = _vedic_real_mul(a, c)
+    bd = _vedic_real_mul(b, d)
+    ad = _vedic_real_mul(a, d)
+    bc = _vedic_real_mul(b, c)
 
-    # Cross products for imaginary part components
-    ad = a * d
-    bc = b * c
-
-    # Combine them to get the final real and imaginary parts
     real_part = ac - bd
     imag_part = ad + bc
 
     return complex(real_part, imag_part)
 
-def vedic_matrix_vector_multiply(matrix, vector):
+def optimize_quantum_simulation_vedic(matrix_operator, quantum_state_vector):
     """
-    Performs matrix-vector multiplication using vedic_complex_multiply for
-    each element-wise complex product.
-    """
-    num_rows = len(matrix)
-    num_cols = len(matrix[0])
-    if num_cols != len(vector):
-        raise ValueError("Matrix columns must match vector length")
+    Optimizes a 3-qubit quantum simulation task using a Vedic Math-inspired approach
+    for complex number multiplication.
 
-    result_vector = [complex(0, 0)] * num_rows
+    The task is to apply an 8x8 complex matrix operator to an 8-element complex
+    quantum state vector (representing a 3-qubit state). The 'optimization' is
+    realized through the conceptual application of Vedic Math Sutras (like
+    Urdhva Tiryagbhyam) to the underlying complex number multiplications
+    performed during the matrix-vector product. This function directly implements
+    the matrix-vector multiplication, but uses custom functions that encapsulate
+    the "Vedic Math" interpretation for complex arithmetic, rather than relying
+    on NumPy's optimized C implementations directly for individual operations.
 
-    for i in range(num_rows):
-        current_sum = complex(0, 0)
-        for j in range(num_cols):
-            # Use Vedic-inspired complex multiplication
-            term = vedic_complex_multiply(matrix[i][j], vector[j])
-            current_sum = current_sum + term  # Standard complex addition
-        result_vector[i] = current_sum
-    return result_vector
-
-def vedic_dot_product(vec1, vec2):
-    """
-    Calculates the dot product of two complex vectors, using vedic_complex_multiply
-    for each element-wise complex product. Assumes vec1 is conjugated for <vec1|vec2>.
-    """
-    if len(vec1) != len(vec2):
-        raise ValueError("Vectors must have the same length")
-
-    result = complex(0, 0)
-    for i in range(len(vec1)):
-        # For dot product <vec1|vec2>, we use the conjugate of vec1[i]
-        term = vedic_complex_multiply(vec1[i].conjugate(), vec2[i])
-        result = result + term  # Standard complex addition
-    return result
-
-def simulate_2_qubit_vedic_optimization(initial_state_vector):
-    """
-    Simulates a basic 2-qubit quantum task, applying Vedic Math principles
-    (specifically the 'Urdhva Tiryagbhyam' Sutra for complex multiplication)
-    to its core arithmetic operations.
-
-    The 'optimization' here refers to structuring complex number arithmetic
-    according to Vedic Sutra principles, breaking down multiplication into
-    explicit vertical and crosswise components, rather than a computational
-    speedup over highly optimized native complex number operations in Python.
-
-    The task involves:
-    1.  Initializing a 2-qubit state.
-    2.  Applying a CNOT gate (control Q0, target Q1).
-    3.  Calculating the expectation value of the Pauli Z operator on Q0.
-
-    Args:
-        initial_state_vector (list or numpy.ndarray): A list or array of 4 complex
-                                                      numbers representing the
-                                                      amplitudes of the 2-qubit state
-                                                      in the computational basis
-                                                      (|00>, |01>, |10>, |11>).
-                                                      The state should be normalized.
+    Parameters:
+    matrix_operator (np.ndarray): An 8x8 complex NumPy array representing
+                                  the quantum operator.
+    quantum_state_vector (np.ndarray): An 8-element complex NumPy array
+                                       representing the 3-qubit quantum state.
 
     Returns:
-        float: The real part of the expectation value of the Pauli Z operator on Q0.
-               Returns a float as expectation values for Hermitian observables are real.
+    np.ndarray: An 8-element complex NumPy array representing the new quantum state
+                after applying the operator.
     """
+    if matrix_operator.shape != (8, 8) or quantum_state_vector.shape != (8,):
+        raise ValueError("Matrix must be 8x8 and vector must be 8-element for a 3-qubit state.")
 
-    # Ensure the input is a list of complex numbers
-    state = [complex(x) for x in initial_state_vector]
+    result_state = np.zeros(8, dtype=complex)
 
-    # Normalize the initial state if not already (safeguard, though caller should ensure)
-    # Using vedic_complex_multiply to calculate magnitude squared for normalization
-    norm_sq = sum([vedic_complex_multiply(amp.conjugate(), amp).real for amp in state])
-    norm = cmath.sqrt(norm_sq)
-    state = [amp / norm for amp in state]
+    # Perform the matrix-vector multiplication: result_state[i] = sum_j (M_ij * V_j)
+    for i in range(8):
+        current_sum = complex(0, 0)
+        for j in range(8):
+            # Compute the product term matrix_operator[i, j] * quantum_state_vector[j]
+            # using the Vedic-inspired complex multiplication function.
+            term = _vedic_complex_mul(matrix_operator[i, j], quantum_state_vector[j])
+            current_sum += term # Standard complex addition for accumulation
 
-    # Define the CNOT gate (control Q0, target Q1) as a 4x4 unitary matrix
-    # Basis order: |00>, |01>, |10>, |11>
-    cnot_gate = [
-        [complex(1, 0), complex(0, 0), complex(0, 0), complex(0, 0)],
-        [complex(0, 0), complex(1, 0), complex(0, 0), complex(0, 0)],
-        [complex(0, 0), complex(0, 0), complex(0, 0), complex(1, 0)],
-        [complex(0, 0), complex(0, 0), complex(1, 0), complex(0, 0)]
-    ]
+        result_state[i] = current_sum
 
-    # Apply the CNOT gate to the state vector using Vedic-inspired matrix-vector multiplication
-    state_after_cnot = vedic_matrix_vector_multiply(cnot_gate, state)
-
-    # Define the observable: Pauli Z on Q0 (tensor product with Identity on Q1)
-    # Z_0 = Z_q0 @ I_q1 = [[1, 0], [0, -1]] @ [[1, 0], [0, 1]]
-    # In the |00>, |01>, |10>, |11> basis:
-    observable_z0 = [
-        [complex(1, 0), complex(0, 0), complex(0, 0), complex(0, 0)],
-        [complex(0, 0), complex(1, 0), complex(0, 0), complex(0, 0)],
-        [complex(0, 0), complex(0, 0), complex(-1, 0), complex(0, 0)],
-        [complex(0, 0), complex(0, 0), complex(0, 0), complex(-1, 0)]
-    ]
-
-    # Calculate O|psi'> using Vedic-inspired matrix-vector multiplication
-    observable_applied_state = vedic_matrix_vector_multiply(observable_z0, state_after_cnot)
-
-    # Calculate the expectation value <psi'|O|psi'> using Vedic-inspired dot product
-    expectation_value = vedic_dot_product(state_after_cnot, observable_applied_state)
-
-    # Expectation values for Hermitian observables are always real
-    return expectation_value.real
+    return result_state
