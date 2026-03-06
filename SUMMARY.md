@@ -42,14 +42,20 @@
 | 15 | Dwandwa Yoga | Implemented | `subSutra15_impl` (sutras/sub_sutra_15.cpp) |
 | 16 | Adyam Antyam Ca | Implemented | `subSutra16_impl` (sutras/sub_sutra_16.cpp) |
 
-## Advanced Cognitive Kernels
+## Advanced Cognitive Kernels (Deca-Domain Toolkit)
 
 | Domain | C++ Functions / Kernels | Primary Location |
 |--------|-------------------------|------------------|
+| Vedic Sutras | `mainSutraX_impl, subSutraY_impl` | sutras/*.cpp |
 | Trigonometry (sin, cos, tan) | `std::sin, std::cos, std::tan` | vedic_logic.cpp (dispatcher) |
 | Matrix Operations (inverse, determinant) | `paravartya_3x3_inverse_c, matrix_engine_tool` | kernels/vedic_kernels.c, vedic_logic.cpp |
 | Calculus (derivative, integral) | `calculus_engine_tool (placeholder)` | vedic_logic.cpp (dispatcher) |
 | Fourier Transforms (FFT) | `fourier_transform_tool (placeholder)` | vedic_logic.cpp (dispatcher) |
+| Vedic Statistics (mean, variance, std_dev) | `vedic_statistics_tool (placeholder)` | vedic_logic.cpp (dispatcher) |
+| Planetary Logic (position, orbital_period) | `planetary_logic_tool (placeholder)` | vedic_logic.cpp (dispatcher) |
+| Vedic Cryptography (encryption, hashing) | `vedic_cryptography_tool (placeholder)` | vedic_logic.cpp (dispatcher) |
+| Vedic Geometry (area, volume) | `vedic_geometry_tool (placeholder)` | vedic_logic.cpp (dispatcher) |
+| Quantum Probability (simulations, predictive) | `quantum_probability_tool (placeholder)` | vedic_logic.cpp (dispatcher) |
 
 
 ## Infrastructure Details
