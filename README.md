@@ -28,7 +28,6 @@ Watch the Divine Earthly Build & Verification Video
 Founder: Joydeep Das | Co-Founder: Prince Kumar Tiwari
 Location: Silchar, Assam, India
 Contact: divineearthly@gmail.com
-​
 
 ​✍️ Founder’s Note: From the Barak Valley to the Global Cloud
 ​"My journey to Divine Earthly did not begin in a computer science lab, but in the rhythms of life in Silchar, Assam. As a BA 5th-semester dropout, I realized that the standard educational path didn't always capture the deep, universal logic found in our heritage and the natural world.
