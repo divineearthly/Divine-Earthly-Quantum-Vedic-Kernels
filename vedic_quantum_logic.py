@@ -1,352 +1,284 @@
-This is a fascinating and highly conceptual challenge! While Vedic Math Sutras provide elegant mental shortcuts for arithmetic, directly translating them into a performance "optimization" for modern quantum simulation software (which relies on highly optimized floating-point operations in hardware) is not straightforward and often wouldn't yield a speedup in pure Python.
+This is a fascinating challenge! While Vedic mathematics primarily deals with integer arithmetic and certain "tricks" for specific scenarios (like numbers near a base, or numbers ending in 5), modern quantum simulations heavily rely on floating-point and complex number arithmetic, typically handled by highly optimized libraries like NumPy, which are orders of magnitude faster than any Python-native "Vedic" implementation.
 
-However, we can design a Python function that *demonstrates the principle* of how Vedic Sutras *could hypothetically be applied* to the underlying arithmetic operations within a quantum simulation task. The "optimization" here is more about illustrating a different computational paradigm for fundamental operations rather than achieving raw speed in Python.
+However, we can illustrate the *concept* by applying a Vedic multiplication technique (like "Urdhva Tiryagbhyam" - Vertically and Crosswise) to the *real* and *imaginary* parts of complex numbers involved in a simplified quantum simulation task.
 
-Let's focus on:
-1.  **Vedic Math Sutra:** `Urdhva Tiryagbhyam` (Vertically and Crosswise) - a general method for multiplication.
-2.  **Quantum Simulation Task:** Applying a unitary gate to a quantum state vector. This involves numerous complex number multiplications and additions.
+The "optimization" here is purely conceptual and demonstrative, showing *how* one might apply Vedic principles. In practice, this Python implementation will be significantly slower than NumPy's optimized C implementations.
 
-The core idea would be to replace the standard real number multiplications within the complex number multiplication process with a Vedic Math-inspired approach.
+**The Task:** We'll simulate applying a quantum gate (represented by a unitary matrix) to a quantum state (represented by a complex vector). This involves complex matrix-vector multiplication. We will replace the standard floating-point multiplications within the complex number arithmetic with a Vedic method.
+
+**Vedic Sutra Chosen: "Urdhva Tiryagbhyam" (Vertically and Crosswise)**
+This is a general method for multiplication that works for any numbers, regardless of their size or proximity to a base. It's akin to how we do long multiplication, but often visualized more symmetrically. We'll adapt it for fixed-point numbers.
 
 ---
 
 ```python
+import cmath
+import math
 import numpy as np
+import time
 
-# --- 1. Vedic Math Core Functions ---
-
-def vedic_multiply_urdhva_tiryagbhyam(num1_str, num2_str):
+def _vedic_multiply_integers(num1: int, num2: int) -> int:
     """
-    Conceptual implementation of Urdhva Tiryagbhyam (Vertically and Crosswise)
-    for two positive integers represented as strings.
-
-    Note: This is a pedagogical implementation to demonstrate the Vedic principle.
-    For actual performance, Python's native '*' operator is far more optimized.
-    It focuses on the algorithm's steps rather than raw speed.
+    Implements Vedic multiplication (Urdhva Tiryagbhyam) for two positive integers.
+    This is a conceptual implementation and not optimized for speed in Python.
     """
-    # Convert numbers to digit lists for easier manipulation
-    n1_digits = [int(d) for d in num1_str]
-    n2_digits = [int(d) for d in num2_str]
+    # Handle signs
+    sign = 1
+    if num1 < 0:
+        sign *= -1
+        num1 = abs(num1)
+    if num2 < 0:
+        sign *= -1
+        num2 = abs(num2)
 
-    len1 = len(n1_digits)
-    len2 = len(n2_digits)
+    s_num1 = str(num1)
+    s_num2 = str(num2)
 
-    # Pad with leading zeros to make lengths equal for easier crosswise steps
+    len1 = len(s_num1)
+    len2 = len(s_num2)
+
+    # Pad with leading zeros so both numbers have the same length
     max_len = max(len1, len2)
-    n1_padded = [0] * (max_len - len1) + n1_digits
-    n2_padded = [0] * (max_len - len2) + n2_digits
+    s_num1 = s_num1.zfill(max_len)
+    s_num2 = s_num2.zfill(max_len)
 
-    # The result will have at most (len1 + len2) digits.
-    # We'll calculate intermediate sums and handle carries.
-    result_digits = [0] * (2 * max_len) # Max possible length for product
-    carries = [0] * (2 * max_len)
+    result_digits = [0] * (2 * max_len)
+    carry = 0
 
-    # Urdhva Tiryagbhyam algorithm steps
-    # Iterates through columns, from right to left (mental analogy)
-    # The 'col' variable represents the "current column" from right,
-    # mapping to the sum of indices `i + j = col_idx`
-    
-    # Example for two 2-digit numbers: ab * cd
-    # col = 0 (rightmost): b * d
-    # col = 1 (middle): a * d + b * c
-    # col = 2 (leftmost): a * c
-
+    # Iterate through the columns, from right to left (idx_col = 0 is rightmost, max_len*2-2 is leftmost)
     for col_idx in range(2 * max_len - 1):
-        current_sum = 0
+        current_sum = carry
         
-        # Iterate through pairs of digits that contribute to the current column
-        # i from n1_padded, j from n2_padded
-        # where i_actual_idx + j_actual_idx = col_idx
-        # This mapping is tricky with padded lists,
-        # let's simplify for demonstration and focus on the cross-multiplication idea.
-
-        # Simplified approach: Directly simulate cross-multiplication for integers
-        # This is not a strict digit-by-digit 'Urdhva Tiryagbhyam' for arbitrary length strings
-        # but a placeholder demonstrating the idea of *replacing* standard multiplication.
-        # For a true general digit-by-digit implementation, it's quite involved.
-        # Given the context of quantum simulation, we care about the *result* of multiplication.
+        # Calculate products for the current column
+        # The column index `col_idx` represents the sum of indices `i + j`
+        # for digits `d1[i]` and `d2[j]` being multiplied.
+        # We need to iterate over pairs (i, j) such that i + j = col_idx_effective
+        # where col_idx_effective ranges from max_len - 1 (rightmost) to max_len - 1 + max_len - 1 (leftmost)
         
-        # For simplicity, we'll implement it for numbers represented as integers,
-        # but conceptually imagine this is done digit by digit.
-        # This is crucial: in Python, this will just call native multiplication.
-        # The 'Vedic' part is the *idea* that this could be a different circuit/algorithm.
+        # This mapping `col_idx` -> `effective_col_idx` is crucial for Urdhva Tiryagbhyam
+        # The number of "diagonal" sums (or columns in the traditional sense) is `2*max_len - 1`
+        # We index them from 0 to `2*max_len - 2`
         
-        # Let's use Nikhilam Navatashcaramam Dashatah (All from 9, last from 10)
-        # for numbers close to a base, as it's easier to show the logic in Python.
-        # Or stick to Urdhva Tiryagbhyam, but acknowledge its complexity for generic strings.
+        # Example for 2-digit numbers (max_len = 2):
+        # s_num1 = "ab", s_num2 = "cd"
+        #
+        # col_idx = 0: (b*d) -> s_num1[1] * s_num2[1]
+        # col_idx = 1: (a*d + b*c) -> s_num1[0]*s_num2[1] + s_num1[1]*s_num2[0]
+        # col_idx = 2: (a*c) -> s_num1[0] * s_num2[0]
 
-        # Re-evaluating: To demonstrate a SUTRA, Nikhilam is simpler to implement conceptually
-        # as it works with deviations from a base. Let's switch to Nikhilam for real numbers.
-        break # Exit this block, will implement Nikhilam below.
+        # A more general way: iterate through possible digit indices
+        # k goes from 0 to max_len - 1 (index from right of num1)
+        # l goes from 0 to max_len - 1 (index from right of num2)
+        # Their sum k+l corresponds to the current output digit position from right (col_idx)
 
-    # --- Let's implement Nikhilam Navatashcaramam Dashatah (All from 9, last from 10) ---
-    # This sutra is good for multiplying numbers close to a base (10, 100, 1000 etc.)
-    # It demonstrates a different approach to multiplication.
-    # We'll adapt it for two numbers `a` and `b`.
+        # Iterate through possible positions `i` for `s_num1` digits
+        # and `j` for `s_num2` digits that contribute to the current column `col_idx`
+        for i in range(max_len):
+            for j in range(max_len):
+                # The sum of the *reverse* indices (from right) for digits
+                # should match the current column index `col_idx`
+                if (max_len - 1 - i) + (max_len - 1 - j) == col_idx:
+                    d1 = int(s_num1[i])
+                    d2 = int(s_num2[j])
+                    current_sum += d1 * d2
+        
+        result_digits[2 * max_len - 1 - col_idx -1] = current_sum % 10 # Place digit
+        carry = current_sum // 10                                     # Calculate new carry
+
+    # The last carry goes to the leftmost position
+    result_digits[0] += carry
     
-    # We'll need a base that's close to both numbers.
-    # For arbitrary floats in quantum sim, this is tricky.
-    # Let's assume we've scaled our amplitudes to be integers, or
-    # we're working with the integer parts/multiples of a base.
+    # Convert list of digits to a single integer
+    result_str = "".join(map(str, result_digits)).lstrip('0')
+    if not result_str:
+        return 0
+    return int(result_str) * sign
 
-    try:
-        num1 = int(num1_str)
-        num2 = int(num2_str)
-    except ValueError:
-        # Handle non-integer inputs conceptually for Vedic multiplication
-        # For actual quantum simulation, these would be floats/complex.
-        # We will apply Vedic concept to *parts* of those floats/complex numbers.
-        return float(num1_str) * float(num2_str) # Fallback for non-integers
-
-    # Find a suitable base (power of 10)
-    base_candidate_1 = 10**(len(str(abs(num1))))
-    base_candidate_2 = 10**(len(str(abs(num2))))
-    base = max(base_candidate_1, base_candidate_2)
-
-    # If numbers are far from the chosen base, Nikhilam isn't efficient.
-    # For demonstration, we'll enforce a base that roughly covers both.
-    # A more robust Nikhilam would choose the *closest* power of 10.
-    # Let's ensure base is a power of 10
-    base_power = 0
-    while 10**base_power < max(abs(num1), abs(num2)):
-        base_power += 1
-    base = 10**base_power
-
-    # Calculate deviations from the base
-    dev1 = num1 - base
-    dev2 = num2 - base
-
-    # First part of the answer (left side)
-    # (one number + deviation of the other)
-    left_part = num1 + dev2  # or num2 + dev1
-
-    # Second part of the answer (right side)
-    # (product of deviations)
-    right_part = dev1 * dev2
-
-    # Combine the parts
-    # This step involves carrying over digits based on the base
-    # For example, if base=100 and right_part=123, then 1 goes to left_part, 23 remains.
-    
-    # Convert to string to handle concatenation based on base
-    right_part_str = str(abs(right_part))
-    num_digits_right = len(str(base)) - 1 # e.g., for base 100, need 2 digits for right part
-
-    if right_part < 0:
-        # This scenario (negative deviations, positive result)
-        # or (one positive, one negative deviation) makes Nikhilam tricky
-        # to combine directly for numbers that span across the base line.
-        # For simplicity, if right_part is negative, we adjust the left part
-        # by subtracting 1 and adding `base - abs(right_part)`.
-        if abs(right_part) >= base:
-            carry_out = abs(right_part) // base
-            right_part_final = abs(right_part) % base
-            left_part -= carry_out
-        else:
-            right_part_final = base - abs(right_part)
-            left_part -= 1
-        result = str(left_part) + str(right_part_final).zfill(num_digits_right)
-        
-        # Determine final sign
-        if (num1 < 0 and num2 > 0) or (num1 > 0 and num2 < 0):
-            return -int(result)
-        else:
-            return int(result)
-
-    else: # right_part >= 0
-        if right_part >= base:
-            carry_over = right_part // base
-            right_part_final = right_part % base
-            left_part += carry_over
-        else:
-            right_part_final = right_part
-
-        result = int(str(left_part) + str(right_part_final).zfill(num_digits_right))
-        
-        # Determine final sign
-        if (num1 < 0 and num2 > 0) or (num1 > 0 and num2 < 0):
-            return -result
-        else:
-            return result
-
-
-def vedic_complex_multiply(z1, z2, precision=10):
+def vedic_multiply_floats(num1: float, num2: float, scaling_factor: int = 10**8) -> float:
     """
-    Performs complex number multiplication (z1 * z2) using Vedic Math
-    principles for the underlying real number multiplications.
-
-    z1 = a + bi
-    z2 = c + di
-
-    Result = (ac - bd) + (ad + bc)i
-
-    We convert the real and imaginary parts to scaled integers,
-    apply a Vedic multiplication concept, and then scale back.
-    This simulates how a dedicated Vedic multiplier might handle
-    fixed-point or scaled-integer representations.
+    Applies Vedic multiplication to two floating-point numbers by converting them
+    to fixed-point integers, multiplying, and then scaling back.
+    The `scaling_factor` determines the precision.
     """
-    a, b = z1.real, z1.imag
-    c, d = z2.real, z2.imag
+    # Convert floats to fixed-point integers
+    int_num1 = round(num1 * scaling_factor)
+    int_num2 = round(num2 * scaling_factor)
 
-    # Scale to integers to apply Vedic concepts (which are for integers)
-    # The 'precision' determines how many decimal places we consider.
-    scale_factor = 10**precision
-    
-    a_scaled = int(round(a * scale_factor))
-    b_scaled = int(round(b * scale_factor))
-    c_scaled = int(round(c * scale_factor))
-    d_scaled = int(round(d * scale_factor))
+    # Perform Vedic multiplication on integers
+    vedic_int_product = _vedic_multiply_integers(int_num1, int_num2)
 
-    # Apply Vedic multiplication concept to the integer components
-    # (Using the conceptual vedic_multiply_urdhva_tiryagbhyam,
-    # which is implemented as nikhilam for integers here)
-    ac_scaled = vedic_multiply_urdhva_tiryagbhyam(str(a_scaled), str(c_scaled))
-    bd_scaled = vedic_multiply_urdhva_tiryagbhyam(str(b_scaled), str(d_scaled))
-    ad_scaled = vedic_multiply_urdhva_tiryagbhyam(str(a_scaled), str(d_scaled))
-    bc_scaled = vedic_multiply_urdhva_tiryagbhyam(str(b_scaled), str(c_scaled))
+    # Scale back to float
+    return vedic_int_product / (scaling_factor * scaling_factor)
 
-    # Scale back and perform additions/subtractions
-    real_part = (ac_scaled - bd_scaled) / (scale_factor**2)
-    imag_part = (ad_scaled + bc_scaled) / (scale_factor**2)
+def vedic_complex_multiply(c1: complex, c2: complex, scaling_factor: int = 10**8) -> complex:
+    """
+    Multiplies two complex numbers using Vedic multiplication for their
+    real and imaginary parts.
+    """
+    # (a + bi) * (c + di) = (ac - bd) + (ad + bc)i
+
+    # Perform the four real multiplications using Vedic method
+    ac = vedic_multiply_floats(c1.real, c2.real, scaling_factor)
+    bd = vedic_multiply_floats(c1.imag, c2.imag, scaling_factor)
+    ad = vedic_multiply_floats(c1.real, c2.imag, scaling_factor)
+    bc = vedic_multiply_floats(c1.imag, c2.real, scaling_factor)
+
+    # Combine results
+    real_part = ac - bd
+    imag_part = ad + bc
 
     return complex(real_part, imag_part)
 
-# --- 2. Quantum Simulation Task ---
-
-def apply_quantum_gate_vedic(state_vector, unitary_matrix, precision=10):
+def simulate_quantum_evolution_vedic(initial_state: np.ndarray, 
+                                     gate_matrix: np.ndarray,
+                                     scaling_factor: int = 10**8) -> np.ndarray:
     """
-    Applies a unitary quantum gate to a state vector, attempting to
-    "optimize" the underlying complex multiplications using Vedic Math concepts.
-
+    Simulates applying a quantum gate to an initial state using Vedic math
+    for the complex multiplications within the matrix-vector multiplication.
+    
     Args:
-        state_vector (np.ndarray): A 1D numpy array of complex numbers
-                                   representing the quantum state.
-        unitary_matrix (np.ndarray): A 2D numpy array of complex numbers
-                                     representing the unitary gate.
-        precision (int): The number of decimal places to consider for
-                         scaling numbers to integers for Vedic multiplication.
-
+        initial_state (np.ndarray): A 1D NumPy array representing the quantum state vector
+                                    (complex numbers).
+        gate_matrix (np.ndarray): A 2D NumPy array representing the quantum gate
+                                  (unitary matrix, complex numbers).
+        scaling_factor (int): The precision factor for converting floats to fixed-point
+                              integers for Vedic multiplication.
+                                    
     Returns:
-        np.ndarray: The new quantum state vector after applying the gate.
-
-    Note: This is a conceptual demonstration. In a real scenario,
-    Python's native NumPy operations are highly optimized and would
-    outperform this custom Vedic implementation for typical use cases.
-    The "optimization" here is purely theoretical, suggesting how Vedic
-    principles could be implemented at a lower, specialized hardware level
-    to accelerate arithmetic.
+        np.ndarray: The evolved quantum state vector.
     """
-    if not isinstance(state_vector, np.ndarray) or state_vector.dtype != complex:
-        raise ValueError("state_vector must be a numpy array of complex numbers.")
-    if not isinstance(unitary_matrix, np.ndarray) or unitary_matrix.dtype != complex:
-        raise ValueError("unitary_matrix must be a numpy array of complex numbers.")
-    if unitary_matrix.shape[1] != len(state_vector):
-        raise ValueError(
-            f"Matrix columns ({unitary_matrix.shape[1]}) must match "
-            f"state vector length ({len(state_vector)})."
-        )
+    if gate_matrix.shape[1] != initial_state.shape[0]:
+        raise ValueError("Gate matrix columns must match state vector rows.")
 
-    num_qubits = int(np.log2(len(state_vector)))
-    if not (2**num_qubits == len(state_vector)):
-        raise ValueError("State vector length must be a power of 2.")
+    dim = initial_state.shape[0]
+    evolved_state = np.zeros(dim, dtype=complex)
 
-    new_state_vector = np.zeros_like(state_vector, dtype=complex)
+    for i in range(dim):  # For each element in the resulting state vector
+        sum_terms = complex(0, 0)
+        for j in range(dim):  # Sum over products
+            # Perform complex multiplication using Vedic method
+            product = vedic_complex_multiply(gate_matrix[i, j], 
+                                             initial_state[j], 
+                                             scaling_factor)
+            sum_terms += product
+        evolved_state[i] = sum_terms
+        
+    return evolved_state
 
-    # Perform matrix-vector multiplication: new_state = U @ old_state
-    # This involves iterating through rows of U and summing products.
-    for i in range(unitary_matrix.shape[0]):  # For each row of the unitary matrix
-        current_sum = complex(0, 0)
-        for j in range(unitary_matrix.shape[1]): # For each element in the row
-            # Use our Vedic-inspired complex multiplication
-            term = vedic_complex_multiply(unitary_matrix[i, j], state_vector[j], precision=precision)
-            current_sum += term # Standard complex addition
-        new_state_vector[i] = current_sum
+# --- Comparison with NumPy for demonstration ---
 
-    return new_state_vector
+def simulate_quantum_evolution_numpy(initial_state: np.ndarray, 
+                                     gate_matrix: np.ndarray) -> np.ndarray:
+    """
+    Simulates applying a quantum gate to an initial state using NumPy's
+    optimized matrix multiplication.
+    """
+    return gate_matrix @ initial_state
 
-# --- Example Usage ---
+
 if __name__ == "__main__":
-    # Define a simple 1-qubit state vector (|psi> = 0.6|0> + 0.8i|1>)
-    psi = np.array([0.6 + 0.0j, 0.0 + 0.8j], dtype=complex)
-    print(f"Initial State Vector: {psi}")
-    print(f"Norm: {np.linalg.norm(psi):.4f}\n")
+    # Example: Hadamard gate on |0>
+    # |0> state vector
+    initial_state_0 = np.array([1/cmath.sqrt(2), 1/cmath.sqrt(2)], dtype=complex) # Example: Superposition
+    
+    # Hadamard gate (2x2)
+    H_gate = np.array([[1/cmath.sqrt(2), 1/cmath.sqrt(2)],
+                       [1/cmath.sqrt(2), -1/cmath.sqrt(2)]], dtype=complex)
 
-    # Define a Hadamard gate (unitary matrix)
-    Hadamard = np.array([[1/np.sqrt(2), 1/np.sqrt(2)],
-                         [1/np.sqrt(2), -1/np.sqrt(2)]], dtype=complex)
-    print(f"Hadamard Gate:\n{Hadamard}\n")
+    print("--- Quantum Simulation Task: Applying Hadamard Gate ---")
+    print("\nInitial State (|psi>):")
+    print(initial_state_0)
+    print("\nHadamard Gate (H):")
+    print(H_gate)
 
-    # Apply the Hadamard gate using our Vedic-inspired function
-    print("Applying Hadamard gate using Vedic-inspired complex multiplication...")
-    psi_after_H_vedic = apply_quantum_gate_vedic(psi, Hadamard, precision=8) # Using 8 decimal places
-    print(f"State after Hadamard (Vedic): {psi_after_H_vedic}")
-    print(f"Norm after Hadamard (Vedic): {np.linalg.norm(psi_after_H_vedic):.4f}\n")
+    # --- Vedic Math Simulation ---
+    print("\n--- Simulating with Vedic Math (Conceptual) ---")
+    start_time_vedic = time.perf_counter()
+    evolved_state_vedic = simulate_quantum_evolution_vedic(initial_state_0, H_gate, scaling_factor=10**4)
+    end_time_vedic = time.perf_counter()
+    print("\nEvolved State (Vedic):")
+    print(evolved_state_vedic)
+    print(f"Time taken (Vedic): {end_time_vedic - start_time_vedic:.6f} seconds")
+    
+    # --- NumPy Simulation (Baseline) ---
+    print("\n--- Simulating with NumPy (Optimized Baseline) ---")
+    start_time_numpy = time.perf_counter()
+    evolved_state_numpy = simulate_quantum_evolution_numpy(initial_state_0, H_gate)
+    end_time_numpy = time.perf_counter()
+    print("\nEvolved State (NumPy):")
+    print(evolved_state_numpy)
+    print(f"Time taken (NumPy): {end_time_numpy - start_time_numpy:.6f} seconds")
 
-    # For comparison, apply with standard NumPy multiplication
-    print("Applying Hadamard gate using standard NumPy multiplication...")
-    psi_after_H_numpy = Hadamard @ psi
-    print(f"State after Hadamard (NumPy): {psi_after_H_numpy}")
-    print(f"Norm after Hadamard (NumPy): {np.linalg.norm(psi_after_H_numpy):.4f}\n")
+    print("\n--- Verification ---")
+    # Expected output for H |+> is |0>
+    # In this case, 1/sqrt(2) |0> + 1/sqrt(2) |1> -> 1/sqrt(2) |0>
+    # H (1/sqrt(2)|0> + 1/sqrt(2)|1>) = 1/sqrt(2) (H|0> + H|1>)
+    # = 1/sqrt(2) ( (1/sqrt(2)|0> + 1/sqrt(2)|1>) + (1/sqrt(2)|0> - 1/sqrt(2)|1>) )
+    # = 1/sqrt(2) ( (2/sqrt(2))|0> + 0|1> )
+    # = 1/sqrt(2) * sqrt(2) |0> = |0>
+    # So expected is [1, 0]
 
-    print("\n--- Comparing results ---")
-    print(f"Difference (Vedic vs NumPy): {np.linalg.norm(psi_after_H_vedic - psi_after_H_numpy):.10f}")
-    # The difference will arise due to the integer scaling and rounding in the vedic_complex_multiply.
-    # Higher precision will reduce this difference.
+    # Let's try initial state |0> = [1, 0]
+    initial_state_zero = np.array([1.0, 0.0], dtype=complex)
+    evolved_state_zero_numpy = simulate_quantum_evolution_numpy(initial_state_zero, H_gate)
+    evolved_state_zero_vedic = simulate_quantum_evolution_vedic(initial_state_zero, H_gate, scaling_factor=10**4)
+    print(f"\nInitial State: |0> = {initial_state_zero}")
+    print(f"Evolved State (NumPy): {evolved_state_zero_numpy}")
+    print(f"Evolved State (Vedic): {evolved_state_zero_vedic}")
+    print(f"Difference (Vedic - NumPy): {np.linalg.norm(evolved_state_zero_vedic - evolved_state_zero_numpy):.2e}")
 
-    # Example with a different gate (Pauli-X)
-    PauliX = np.array([[0, 1],
-                       [1, 0]], dtype=complex)
-    print(f"\nPauli-X Gate:\n{PauliX}\n")
-
-    print("Applying Pauli-X gate using Vedic-inspired complex multiplication...")
-    psi_after_X_vedic = apply_quantum_gate_vedic(psi, PauliX, precision=8)
-    print(f"State after Pauli-X (Vedic): {psi_after_X_vedic}")
-    print(f"Norm after Pauli-X (Vedic): {np.linalg.norm(psi_after_X_vedic):.4f}\n")
-
-    print("Applying Pauli-X gate using standard NumPy multiplication...")
-    psi_after_X_numpy = PauliX @ psi
-    print(f"State after Pauli-X (NumPy): {psi_after_X_numpy}")
-    print(f"Norm after Pauli-X (NumPy): {np.linalg.norm(psi_after_X_numpy):.4f}\n")
-
-    print("\n--- Comparing results for Pauli-X ---")
-    print(f"Difference (Vedic vs NumPy): {np.linalg.norm(psi_after_X_vedic - psi_after_X_numpy):.10f}")
-
-    # Demonstration of the Nikhilam multiplication for integers
-    print("\n--- Nikhilam (All from 9, last from 10) Examples ---")
-    print(f"12 * 8 = {vedic_multiply_urdhva_tiryagbhyam('12', '8')} (Expected: 96)")
-    print(f"98 * 97 = {vedic_multiply_urdhva_tiryagbhyam('98', '97')} (Expected: 9506)")
-    print(f"103 * 105 = {vedic_multiply_urdhva_tiryagbhyam('103', '105')} (Expected: 10815)")
-    print(f"5 * 6 = {vedic_multiply_urdhva_tiryagbhyam('5', '6')} (Expected: 30)")
-    print(f"-5 * 6 = {vedic_multiply_urdhva_tiryagbhyam('-5', '6')} (Expected: -30)")
-    print(f"-9 * -12 = {vedic_multiply_urdhva_tiryagbhyam('-9', '-12')} (Expected: 108)")
-
+    # The precision of the Vedic method depends on the scaling_factor
+    print(f"\nNote: Vedic Math implementation uses a scaling_factor of 10^4 for fixed-point arithmetic.")
+    print(f"It introduces some floating-point precision error compared to NumPy, and is significantly slower.")
+    print(f"The 'optimization' is conceptual, illustrating how Vedic multiplication could be applied to sub-operations.")
 ```
 
-### Explanation and Optimization Context:
+---
 
-1.  **Vedic Sutra Used:**
-    *   I initially considered `Urdhva Tiryagbhyam` but opted for `Nikhilam Navatashcaramam Dashatah` (All from 9 and the last from 10) for `vedic_multiply_urdhva_tiryagbhyam`. The name is kept for the original intent, but the implementation is `Nikhilam`.
-    *   **Nikhilam Logic:** This Sutra is excellent for multiplying numbers close to a base (like 10, 100, 1000).
-        *   Take two numbers, say 98 and 97.
-        *   Choose a base (e.g., 100).
-        *   Find their deviations from the base: `98 - 100 = -2`, `97 - 100 = -3`.
-        *   The left part of the answer is `(number1 + deviation2)` or `(number2 + deviation1)`: `98 + (-3) = 95` (or `97 + (-2) = 95`).
-        *   The right part of the answer is the product of the deviations: `(-2) * (-3) = 6`.
-        *   Combine them, ensuring the right part has as many digits as the base has zeros: `95` and `06` -> `9506`.
-    *   This demonstrates an alternative way to perform multiplication, which might be faster in *specific hardware implementations* or for *very large integers* where standard algorithms become less efficient.
+### Explanation:
 
-2.  **Quantum Simulation Task Optimization:**
-    *   **Matrix-Vector Multiplication:** The core of applying a unitary gate `U` to a state `|psi>` is `|psi'> = U |psi>`. This involves numerous complex number multiplications and additions.
-    *   **Complex Multiplication:** `(a + bi) * (c + di) = (ac - bd) + (ad + bc)i`. This requires four real number multiplications (`ac`, `bd`, `ad`, `bc`) and two additions/subtractions.
-    *   **Vedic Integration:** Our `vedic_complex_multiply` function replaces these four real multiplications with calls to `vedic_multiply_urdhva_tiryagbhyam` (our Nikhilam implementation).
-    *   **Scaling:** Vedic Math is primarily for integers. Quantum amplitudes are complex floating-point numbers. To bridge this, we scale the real and imaginary parts by `10^precision`, convert them to integers, apply the Vedic multiplication concept, and then scale the result back. This simulates a fixed-point arithmetic approach where a Vedic multiplier could be used.
+1.  **`_vedic_multiply_integers(num1, num2)`**:
+    *   This is the core Vedic multiplication function, specifically implementing "Urdhva Tiryagbhyam" (Vertically and Crosswise).
+    *   It takes two integers, converts them to strings of digits, and ensures they have the same length by padding with leading zeros.
+    *   It then iterates through "columns" of multiplication, accumulating cross-products and handling carries, similar to traditional long multiplication but with a systematic approach for multiple digits.
+    *   The `col_idx` loop goes from the rightmost output digit position to the leftmost.
+    *   The inner loops (`i` and `j`) find pairs of digits from `num1` and `num2` that contribute to the current output `col_idx`.
+    *   It stores the digits of the result in `result_digits` and converts it back to an integer.
+    *   Handles negative numbers by multiplying absolute values and applying the correct sign at the end.
 
-3.  **Why "Optimization" is Conceptual in Python:**
-    *   **Modern CPUs:** Contemporary processors have highly optimized floating-point units (FPUs) that perform basic `*` operations in a single clock cycle (or a few pipelined cycles). NumPy leverages these highly optimized C/Fortran libraries (like BLAS) that are meticulously tuned for speed.
-    *   **Python Overhead:** Implementing digit-by-digit or deviation-based arithmetic in pure Python (with string conversions, loops, and conditional logic) introduces significant overhead compared to native operations.
-    *   **Hardware vs. Software:** The true potential "optimization" from Vedic Math would come from designing specialized hardware (e.g., FPGAs, ASICs) that implement these Sutras directly at a low level, potentially achieving faster multiplication for certain number ranges or specific types of numbers (e.g., integers near powers of 10) than general-purpose multipliers. In quantum computing, custom hardware for arithmetic could theoretically speed up parts of classical control systems or error correction if numbers can be efficiently mapped to Vedic-friendly forms.
+2.  **`vedic_multiply_floats(num1, num2, scaling_factor)`**:
+    *   This function bridges the gap between floating-point numbers (used in quantum mechanics) and the integer-based Vedic methods.
+    *   It converts `num1` and `num2` into large integers by multiplying them with a `scaling_factor` (e.g., `10**8`). This is a fixed-point representation.
+    *   It then calls `_vedic_multiply_integers` to perform the multiplication.
+    *   Finally, it scales the result back down by dividing by `scaling_factor * scaling_factor` to restore the decimal point.
+    *   The `scaling_factor` determines the precision of this fixed-point arithmetic.
 
-4.  **Precision and Accuracy:**
-    *   The `precision` parameter in `vedic_complex_multiply` is crucial. Scaling floating-point numbers to integers and back introduces quantization error (rounding). Higher `precision` reduces this error but might lead to larger integers, potentially impacting the *hypothetical* efficiency of the Vedic method. You'll notice a small difference between the Vedic and NumPy results, which is due to this rounding.
+3.  **`vedic_complex_multiply(c1, c2, scaling_factor)`**:
+    *   Complex number multiplication is defined as `(a + bi) * (c + di) = (ac - bd) + (ad + bc)i`.
+    *   This function breaks down the complex multiplication into its four real-number multiplications (`ac`, `bd`, `ad`, `bc`).
+    *   Each of these real multiplications is performed using `vedic_multiply_floats`.
+    *   The results are then combined to form the final complex number.
 
-In summary, this function provides a pedagogical illustration of how Vedic Math Sutras *could* be applied at the fundamental arithmetic level within a quantum simulation if specialized hardware existed. It highlights an alternative computational paradigm rather than offering a practical speedup in a standard Python environment.
+4.  **`simulate_quantum_evolution_vedic(initial_state, gate_matrix, scaling_factor)`**:
+    *   This function performs the matrix-vector multiplication (`gate_matrix @ initial_state`) to simulate applying a quantum gate.
+    *   It iterates through the rows of the `gate_matrix` and elements of the `initial_state`.
+    *   Instead of using standard Python/NumPy complex multiplication, it calls `vedic_complex_multiply` for each term in the sum.
+    *   The results are accumulated to form the `evolved_state` vector.
+
+5.  **`simulate_quantum_evolution_numpy(initial_state, gate_matrix)`**:
+    *   This is a baseline function that simply uses NumPy's highly optimized `@` operator for matrix-vector multiplication. This is what you would typically use in real-world quantum simulations.
+
+### Why this is "optimized" in a Vedic context (and not in a practical sense):
+
+*   **Vedic Principles**: The `_vedic_multiply_integers` function embodies the "Urdhva Tiryagbhyam" Sutra, providing an alternative algorithm for multiplication.
+*   **Decomposition**: The complex multiplication is broken down into its fundamental real multiplications, where the Vedic method is applied.
+*   **Fixed-Point Arithmetic**: By using a `scaling_factor`, we simulate higher precision integer arithmetic which aligns more with the traditional domain of Vedic math.
+
+### Practical Considerations (Why it's slower):
+
+*   **Python Overhead**: Pure Python arithmetic and string manipulations are much slower than low-level C implementations (like those underlying NumPy).
+*   **Algorithm Complexity**: While conceptually elegant, `_vedic_multiply_integers` involves loops over digits and string conversions, adding significant overhead compared to hardware-optimized integer multiplication.
+*   **Fixed-Point Limitations**: Converting to fixed-point integers and scaling back introduces potential precision errors if the `scaling_factor` isn't large enough, and the extra steps add computational cost.
+*   **NumPy's Efficiency**: NumPy leverages highly optimized BLAS (Basic Linear Algebra Subprograms) libraries (often written in Fortran or C and highly tuned for specific CPU architectures), which perform matrix operations with incredible speed.
+
+This example provides a concrete way to conceptually link Vedic mathematical principles to a computational sub-task within quantum simulation, even if it doesn't offer a practical performance improvement over modern libraries.
