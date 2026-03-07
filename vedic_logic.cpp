@@ -1,4 +1,5 @@
 #include "vedic_logic.h"
+#include "nlohmann/json.hpp"
 #include <fstream>
 #include <iostream>
 #include <vector>
