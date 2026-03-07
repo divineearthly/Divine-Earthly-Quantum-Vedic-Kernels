@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: read
+  packages: write # Added for potential future package publishing
 
 jobs:
   build-and-test:
@@ -17,6 +18,17 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Print Environment Details
+      run: |
+        echo "--- Current Working Directory ---"
+        pwd
+        echo "--- Files in Repository Root ---"
+        ls -la
+        echo "--- Python Version ---"
+        python3 --version
+        echo "--- Pip Version ---"
+        pip --version
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -24,16 +36,18 @@ jobs:
 
     - name: Install dependencies
       run: |
+        set -x # Enable verbose logging
         python -m pip install --upgrade pip
         pip install pandas scikit-learn torch joblib
 
     - name: Compile C++ Kernel
       run: |
+        set -x # Enable verbose logging
         make clean
         make -j$(nproc)
 
     - name: Run Integration Tests
       run: |
-        # Ensure the binary is executable and run the test suite
+        set -x # Enable verbose logging
         chmod +x vedic_engine
         python3 tests/test_kernel.py

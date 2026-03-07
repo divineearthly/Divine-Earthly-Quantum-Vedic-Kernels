@@ -1,12 +1,20 @@
 #include <iostream>
 #include <string>
-#include "vedic_logic.h"
+#include "vedic_logic.h" // Include the corrected header
 
 int main(int argc, char* argv[]) {
+    // Load rules once at application startup
+    static bool rules_loaded = false;
+    if (!rules_loaded) {
+        loadRules("/content/Divine-Earthly-Quantum-Vedic-Kernels/configs/rules.json");
+        rules_loaded = true;
+    }
+
     if (argc < 3) {
-        std::cout << "{\"status\":\"error\", \"message\":\"Usage: ./vedic_engine <gate_name> <json_input>\"}" << std::endl;
+        std::cerr << R"({"status":"error", "message":"Usage: ./vedic_engine <gate_name> <json_input>"})" << std::endl;
         return 1;
     }
+
     std::string gate_name = argv[1];
     std::string input_json = argv[2];
 
@@ -14,7 +22,9 @@ int main(int argc, char* argv[]) {
         std::string result = processVedicSutra(gate_name, input_json);
         std::cout << result << std::endl;
     } catch (const std::exception& e) {
-        std::cout << "{\"status\":\"error\", \"message\":\"" << e.what() << "\"}" << std::endl;
+        std::cerr << R"({"status":"error", "message":"Runtime error: )" << e.what() << R"("})" << std::endl;
+        return 1;
     }
+
     return 0;
 }
