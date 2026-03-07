@@ -10,7 +10,6 @@ std::vector<Rule> loaded_rules;
 void loadRules(const std::string& filepath) {
     std::ifstream file(filepath);
     if (!file.is_open()) {
-        // Silently fail here, main will try another path
         return;
     }
     json data;
@@ -38,7 +37,11 @@ void loadRules(const std::string& filepath) {
 
 std::string processVedicSutra(const std::string& sutra_name, const std::string& input_data_json) {
     json input_data;
-    try { input_data = json::parse(input_data_json); } catch (...) { return "{"status":"error"}"; }
+    try { 
+        input_data = json::parse(input_data_json); 
+    } catch (...) { 
+        return R"({"status":"error", "message":"invalid_json"})"; 
+    }
 
     for (const auto& rule : loaded_rules) {
         bool match_conditions = true;
