@@ -42,7 +42,7 @@ void loadRules(const std::string& filepath) {
             rule.priority = rule_json.value("priority", 0);
             loaded_rules.push_back(rule);
         }
-        std::cout << "Successfully loaded " << loaded_rules.size() << " rules." << std::endl;
+        std::cerr << "Successfully loaded " << loaded_rules.size() << " rules." << std::endl;
     } else {
         std::cerr << "Error: 'rules' array not found in JSON." << std::endl;
     }
@@ -69,6 +69,7 @@ std::string mainSutra1_impl(const std::string& input);
 // ... (rest of implementation functions are linked via sutras/*.cpp)
 
 std::string processVedicSutra(const std::string& sutra_name, const std::string& input_data_json) {
+    
     if (loaded_rules.empty()) loadRules("/content/Divine-Earthly-Quantum-Vedic-Kernels/configs/rules.json");
     nlohmann::json input_data;
     try { input_data = nlohmann::json::parse(input_data_json); } catch (...) {}
@@ -78,11 +79,26 @@ std::string processVedicSutra(const std::string& sutra_name, const std::string& 
         for (const auto& cond : rule.conditions) {
             std::string type = cond.value("type", "");
             std::string op = cond.value("operator", "");
-            std::string val = cond.value("value", "");
-            if (type == "gate_name" && sutra_name != val) match = false;
-            else if (input_data.contains(type)) {
-                if (op == "equals" && input_data[type].dump() != "\""+val+"\"") match = false;
-            } else match = false;
+            nlohmann::json target_val = cond["value"];
+
+            if (type == "gate_name") {
+                if (sutra_name != target_val.get<std::string>()) match = false;
+            } else if (input_data.contains(type)) {
+                auto& input_val = input_data[type];
+                if (op == "equals") {
+                    if (input_val.is_number() && target_val.is_number()) {
+                        if (input_val.get<double>() != target_val.get<double>()) match = false;
+                    } else {
+                        std::string s1 = input_val.is_string() ? input_val.get<std::string>() : input_val.dump();
+                        std::string s2 = target_val.is_string() ? target_val.get<std::string>() : target_val.dump();
+                        if (s1 != s2) match = false;
+                    }
+                } else if (op == "greater_than") {
+                    double val1 = input_val.is_number() ? input_val.get<double>() : std::stod(input_val.is_string() ? input_val.get<std::string>() : input_val.dump());
+                    double val2 = target_val.is_number() ? target_val.get<double>() : std::stod(target_val.is_string() ? target_val.get<std::string>() : target_val.dump());
+                    if (val1 <= val2) match = false;
+                }
+            } else { match = false; }
             if (!match) break;
         }
         if (match) {
@@ -93,4 +109,9 @@ std::string processVedicSutra(const std::string& sutra_name, const std::string& 
             return resp.dump();
         }
     }
+    nlohmann::json no_match_resp;
+    no_match_resp["status"] = "success";
+    no_match_resp["message"] = "No intervention required";
+    no_match_resp["sutra"] = sutra_name;
+    return no_match_resp.dump();
 }
