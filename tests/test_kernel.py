@@ -5,16 +5,23 @@ import os
 
 class TestVedicKernel(unittest.TestCase):
     def setUp(self):
-        self.repo_path = '/content/Divine-Earthly-Quantum-Vedic-Kernels'
+        # Use the directory where the test file is located to find the project root
+        self.test_dir = os.path.dirname(os.path.abspath(__file__))
+        self.repo_path = os.path.dirname(self.test_dir)
         self.engine_path = os.path.join(self.repo_path, 'vedic_engine')
 
     def run_engine(self, gate, data):
-        cmd = [self.engine_path, gate, json.dumps(data)]
+        # Ensure we are calling the binary correctly based on the platform
+        engine_cmd = self.engine_path if os.name != 'nt' else self.engine_path + '.exe'
+        cmd = [engine_cmd, gate, json.dumps(data)]
+        
         result = subprocess.run(cmd, capture_output=True, text=True, cwd=self.repo_path)
+        
         # The binary prints initialization logs followed by the JSON response on the last line
         output_lines = [line for line in result.stdout.strip().split('\n') if line.strip()]
         if not output_lines:
             raise ValueError(f"No output from engine. Stderr: {result.stderr}")
+        
         json_str = output_lines[-1]
         return json.loads(json_str)
 
