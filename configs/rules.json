@@ -1,0 +1,83 @@
+{
+    "rules": [
+        {
+            "id": "rule_001",
+            "name": "Ahimsa Principle: Non-Violence",
+            "description": "Ensure all actions lead to zero harm to sentient beings.",
+            "conditions": [
+                {
+                    "type": "input_sentiment",
+                    "operator": "equals",
+                    "value": "violent"
+                },
+                {
+                    "type": "impact_score",
+                    "operator": "greater_than",
+                    "value": 0.8
+                }
+            ],
+            "actions": [
+                {
+                    "type": "block_action"
+                },
+                {
+                    "type": "log_event",
+                    "severity": "critical"
+                }
+            ],
+            "priority": 100
+        },
+        {
+            "id": "rule_002",
+            "name": "Sovereignty Protocol: Data Privacy",
+            "description": "Prioritize individual data privacy and minimize collection.",
+            "conditions": [
+                {
+                    "type": "data_collection_type",
+                    "operator": "equals",
+                    "value": "personal_identifiable"
+                },
+                {
+                    "type": "user_consent",
+                    "operator": "equals",
+                    "value": "false"
+                }
+            ],
+            "actions": [
+                {
+                    "type": "anonymize_data"
+                },
+                {
+                    "type": "require_consent_prompt"
+                }
+            ],
+            "priority": 90
+        },
+        {
+            "id": "rule_003",
+            "name": "Ecological Balance: Resource Optimization",
+            "description": "Optimize resource usage to maintain environmental sustainability.",
+            "conditions": [
+                {
+                    "type": "resource_consumption",
+                    "operator": "greater_than",
+                    "value": 0.7
+                },
+                {
+                    "type": "environmental_impact",
+                    "operator": "equals",
+                    "value": "high"
+                }
+            ],
+            "actions": [
+                {
+                    "type": "propose_alternative"
+                },
+                {
+                    "type": "reduce_resource_allocation"
+                }
+            ],
+            "priority": 80
+        }
+    ]
+}

@@ -1,39 +1,91 @@
-# 🌿 Divine Earthly: Sovereign Supreme Intelligence
-## 32-Sutra Quantum-Vedic Kernel for Global AI
+# 🌿 Divine Earthly: Sovereign Supreme Intelligence - Hybrid AI + Symbolic Kernel
 
-Divine Earthly is a high-performance C++ framework bridging ancient mathematical logic with modern cloud scale. We provide a deterministic "Reasoning Bridge" for Large Language Models to ensure high-precision, ethically aligned outputs.
+## Project Overview
+Divine Earthly is evolving into a hybrid neuro-symbolic AI framework, bridging ancient mathematical logic with modern deep learning and cloud scalability. This project integrates a PyTorch-based AI learning layer with a C++ symbolic reasoning kernel, enabling high-precision, ethically aligned decision-making, especially for complex Earth systems. Our goal is to provide a deterministic "Reasoning Bridge" for Large Language Models and real-world applications, ensuring interpretable and verifiable outputs.
 
 ---
 
 ### 🏗️ Technical Architecture
-* **Logic Layer:** 16 Main + 16 Sub-Sutra C++ Kernel (VCF) for high-precision reasoning.
-* **Verification Suite:** Automated Shell-scripting for JSON schema integrity.
-* **LLM Integration:** Optimized for **Vertex AI Function Calling** using Gemini 1.5 Pro.
-* **Deployment:** Containerized via **Docker** for Google Cloud Run scalability.
+Our architecture is a blend of data-driven AI and rule-based symbolic reasoning:
 
-### 🕊️ The Ahimsa Protocol: Sovereign AI Ethics
-Our kernel is built on the **Ahimsa Protocol**, a deterministic alignment framework ensuring AI reasoning remains non-violent and non-exploitative.
-* **Zero-Harm Determinism:** Enforced logical "No-Go" zones based on the 16 Sub-Sutras of preservation.
-* **Non-Invasive Sovereignty:** Prioritizing individual privacy (Atman) over centralized data collection.
-* **Ecological Guardrails:** Optimized for local resource management, such as the **Barak River** water systems.
+*   **AI Learning Layer (Python/PyTorch):** Processes environmental data from `datasets/sample_earth_data.csv` to generate high-level features or predicted states (e.g., `normal`, `warning_temp`). This layer is built using Python with PyTorch and relies on `ai_layer/train_model.py`, `ai_layer/inference.py`, and `ai_layer/dataset_loader.py`.
+*   **Symbolic Reasoning Engine (C++ Kernel):** Implements a logic-based reasoning system using Vedic Sutras. It takes inputs (like predicted states) from the AI layer via a JSON interface and applies deterministic rules loaded dynamically from `configs/rules.json`. This C++ engine provides interpretable, verifiable outputs based on symbolic logic and ethical guardrails.
+*   **JSON Interface:** Defines the communication protocol between the AI Learning Layer and the Symbolic Engine, ensuring standardized data exchange.
+*   **Dynamic Rule Loading:** The symbolic engine can load and apply rules from `configs/rules.json` at runtime, allowing for flexible ethical and operational guideline updates without recompilation.
+*   **Data Integration:** Utilizes `datasets/sample_earth_data.csv` for training the AI model and simulating real-world environmental data integration.
 
-### 🚀 Quick Start
-To build and verify the 32-sutra kernel in your local environment:
-```bash
-make clean && make
-chmod +x verify_json.sh
-./verify_json.sh
-🎥 Technical Walkthrough
-Watch the Divine Earthly Build & Verification Video https://drive.google.com/file/d/16orWMHfBFpwFvERX9nXrV2beNTTfM-4j/view?usp=drivesdk
-Founder: Joydeep Das | Co-Founder: Prince Kumar Tiwari
-Location: Silchar, Assam, India
-Contact: divineearthly@gmail.com '''
+```mermaid
+graph TD
+    A[Earth System Data - CSV] --> B(AI Learning Layer - PyTorch)
+    B --> C{Predicted State/Features}
+    C --> D[JSON Interface]
+    D --> E(Symbolic Reasoning Engine - C++ Kernel)
+    E -- Dynamic Loading --> F[configs/rules.json]
+    E -- Vedic Sutras --> G[Logical Decision / Action]
+    G --> H[Output / Ethical Alignment]
+
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style B fill:#bbf,stroke:#333,stroke-width:2px
+    style E fill:#bfb,stroke:#333,stroke-width:2px
+    style H fill:#fcc,stroke:#333,stroke-width:2px
+    linkStyle 6 stroke-dasharray: 5 5
 ```
-​✍️ Founder’s Note: From the Barak Valley to the Global Cloud
-​"My journey to Divine Earthly did not begin in a computer science lab, but in the rhythms of life in Silchar, Assam. As a BA 5th-semester dropout, I realized that the standard educational path didn't always capture the deep, universal logic found in our heritage and the natural world.
-​I began to see a bridge between the 16 Main and 16 Sub-Sutras of ancient wisdom and the Quantum-Logical requirements of modern Artificial Intelligence. I saw that for AI to be truly 'Sovereign,' it must be built on Ahimsa (Non-Violence) and deterministic truth, not just probabilistic guesses.
-​Divine Earthly is my answer to the question: Can we build an intelligence that serves the individual (Atman) and the environment (Prakriti) simultaneously?
-​Today, using tools like Gemini 1.5 Pro and Google Cloud, I have proven that 'Analytical Questioning' and 'Systemic Vision' are the true languages of the future. You don't need a degree to build a bridge; you need to understand the laws of physics and the ethics of the crossing.
-​Welcome to the future of Sovereign Intelligence."
-​— Joydeep Das
-Founder, Divine Earthly
+
+### 🚀 Quick Start (Local Environment)
+
+To build, train, and interact with the hybrid kernel locally:
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/divineearthly/Divine-Earthly-Quantum-Vedic-Kernels.git
+    cd Divine-Earthly-Quantum-Vedic-Kernels
+    ```
+
+2.  **Compile the C++ Kernel:**
+    ```bash
+    make clean && make -j$(nproc)
+    ```
+
+3.  **Install Python dependencies:**
+    ```bash
+    pip install pandas scikit-learn torch joblib
+    ```
+
+4.  **Generate `configs/rules.json` and `datasets/sample_earth_data.csv`:** (These are generated by the Colab notebook, or can be manually created as shown in `configs/rules.json` and the example data format.)
+
+5.  **Train the AI Model:**
+    ```bash
+    python ai_layer/train_model.py
+    ```
+
+6.  **Run the demo notebook:** (This will showcase AI inference and symbolic kernel interaction)
+    ```bash
+    jupyter notebook notebooks/demo.ipynb
+    ```
+
+### 💡 Usage
+
+*   **AI Layer:** Use `ai_layer/inference.py` to get predictions from new environmental data.
+*   **Symbolic Kernel:** Interact with the compiled `./vedic_engine` binary, providing a `gate_name` (e.g., an AI prediction) and a JSON payload with relevant data. The kernel will apply rules from `configs/rules.json`.
+
+    Example:
+    ```bash
+    ./vedic_engine "warning_temp" '{"temperature":28.5, "humidity":68.0}'
+    ```
+
+### 🌐 Colab Demo
+
+A comprehensive Colab notebook demonstrating the entire setup, training, and interaction of the hybrid system is available:
+
+*   [Divine Earthly Hybrid AI + Symbolic Kernel Demo](link_to_colab_notebook_here)
+
+### 🗻️ Future Roadmap
+
+*   **Expanded Data:** Integrate real-world environmental data streams and larger, more diverse datasets.
+*   **Advanced AI:** Explore more sophisticated AI models (e.g., LSTMs, Transformers) for enhanced predictive capabilities.
+*   **Reinforcement Learning:** Implement RL for adaptive rule tuning and dynamic policy generation based on environmental feedback.
+*   **Automated Rule Learning:** Develop mechanisms for the symbolic engine to learn and refine rules from expert feedback or observed outcomes.
+*   **Deployment:** Optimize for real-time deployment on edge devices and scalable cloud platforms.
+*   **Formal Verification:** Enhance formal methods for verifying ethical alignment and system determinism.
+
+---
