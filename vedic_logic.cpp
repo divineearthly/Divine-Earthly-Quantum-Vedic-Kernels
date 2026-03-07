@@ -69,43 +69,28 @@ std::string mainSutra1_impl(const std::string& input);
 // ... (rest of implementation functions are linked via sutras/*.cpp)
 
 std::string processVedicSutra(const std::string& sutra_name, const std::string& input_data_json) {
-    json input_data = json::parse(input_data_json);
-    json output_json;
-    output_json["status"] = "success";
-    output_json["sutra"] = sutra_name;
+    if (loaded_rules.empty()) loadRules("/content/Divine-Earthly-Quantum-Vedic-Kernels/configs/rules.json");
+    nlohmann::json input_data;
+    try { input_data = nlohmann::json::parse(input_data_json); } catch (...) {}
 
-    // Matrix Domain
-    if (sutra_name == "matrix_engine_tool") {
-        std::string op = input_data.value("operation", "");
-        std::vector<double> mat = input_data.value("matrix_data", std::vector<double>(9, 0.0));
-        if (op == "inverse") {
-            std::vector<double> inv(9);
-            paravartya_3x3_inverse_c(mat.data(), inv.data());
-            output_json["computed_value"] = inv;
-        } else {
-            output_json["computed_value"] = "operation_not_implemented";
+    for (const auto& rule : loaded_rules) {
+        bool match = true;
+        for (const auto& cond : rule.conditions) {
+            std::string type = cond.value("type", "");
+            std::string op = cond.value("operator", "");
+            std::string val = cond.value("value", "");
+            if (type == "gate_name" && sutra_name != val) match = false;
+            else if (input_data.contains(type)) {
+                if (op == "equals" && input_data[type].dump() != "\""+val+"\"") match = false;
+            } else match = false;
+            if (!match) break;
+        }
+        if (match) {
+            nlohmann::json resp;
+            resp["status"] = "success";
+            resp["message"] = "Rule Applied: " + rule.name;
+            resp["sutra"] = sutra_name;
+            return resp.dump();
         }
     }
-    // Trigonometry Domain
-    else if (sutra_name == "vedic_trig_tool") {
-        double angle = input_data.value("angle_degrees", 0.0);
-        std::string op = input_data.value("operation", "sin");
-        double rad = angle * M_PI / 180.0;
-        output_json["computed_value"] = (op == "sin") ? std::sin(rad) : (op == "cos" ? std::cos(rad) : std::tan(rad));
-    }
-    // Signal/Fourier Domain
-    else if (sutra_name == "fourier_transform_tool") {
-        output_json["dominant_frequency"] = "125 Hz"; // Placeholder mapping to FFT kernel
-    }
-    // Standard 32 Sutras
-    else if (sutra_name.find("MainSutra_") != std::string::npos || sutra_name.find("SubSutra_") != std::string::npos) {
-        // Original dispatch logic for 32 sutras
-        output_json["computed_value"] = input_data.value("value", 0);
-    } 
-    else {
-        output_json["status"] = "error";
-        output_json["message"] = "Unknown Cognitive Gate: " + sutra_name;
-    }
-
-    return output_json.dump();
 }
