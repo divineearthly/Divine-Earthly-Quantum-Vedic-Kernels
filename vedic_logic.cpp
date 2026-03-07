@@ -70,6 +70,7 @@ std::string mainSutra1_impl(const std::string& input);
 
 std::string processVedicSutra(const std::string& sutra_name, const std::string& input_data_json) {
     
+    
     if (loaded_rules.empty()) loadRules("/content/Divine-Earthly-Quantum-Vedic-Kernels/configs/rules.json");
     nlohmann::json input_data;
     try { input_data = nlohmann::json::parse(input_data_json); } catch (...) {}
@@ -94,8 +95,8 @@ std::string processVedicSutra(const std::string& sutra_name, const std::string& 
                         if (s1 != s2) match = false;
                     }
                 } else if (op == "greater_than") {
-                    double val1 = input_val.is_number() ? input_val.get<double>() : std::stod(input_val.is_string() ? input_val.get<std::string>() : input_val.dump());
-                    double val2 = target_val.is_number() ? target_val.get<double>() : std::stod(target_val.is_string() ? target_val.get<std::string>() : target_val.dump());
+                    double val1 = input_val.is_number() ? input_val.get<double>() : std::stod(input_val.is_string() ? input_val.get<std::string>() : "0");
+                    double val2 = target_val.is_number() ? target_val.get<double>() : std::stod(target_val.is_string() ? target_val.get<std::string>() : "0");
                     if (val1 <= val2) match = false;
                 }
             } else { match = false; }
