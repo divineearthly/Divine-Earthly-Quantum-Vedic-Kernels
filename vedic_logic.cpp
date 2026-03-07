@@ -71,7 +71,10 @@ std::string mainSutra1_impl(const std::string& input);
 std::string processVedicSutra(const std::string& sutra_name, const std::string& input_data_json) {
     
     
-    if (loaded_rules.empty()) loadRules("/content/Divine-Earthly-Quantum-Vedic-Kernels/configs/rules.json");
+    if (loaded_rules.empty()) {
+        loadRules("configs/rules.json");
+        if (loaded_rules.empty()) loadRules("rules.json");
+    }
     nlohmann::json input_data;
     try { input_data = nlohmann::json::parse(input_data_json); } catch (...) {}
 
