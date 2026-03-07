@@ -71,13 +71,7 @@ std::string processVedicSutra(const std::string& sutra_name, const std::string& 
     // --- Dynamic Rule Evaluation --- 
     // Iterate through rules and find a match
     for (const auto& rule : loaded_rules) {
-        // Check if the rule is specifically for this gate or a general rule
-        bool gate_name_matches = true;
-        // Check if this rule is applicable to the current sutra_name (gate)
-        // For simplicity, we assume rules should apply to any gate unless specified
-        // In a more complex system, rules might have a 'target_gate' field.
-        
-        bool match_conditions = true;
+        bool match_conditions = true; // Initialize match_conditions for each rule
         for (const auto& cond : rule.conditions) {
             std::string type = cond.value("type", "");
             std::string op = cond.value("operator", "");
@@ -85,7 +79,11 @@ std::string processVedicSutra(const std::string& sutra_name, const std::string& 
 
             // Special condition for matching the gate name itself
             if (type == "gate_name") {
-                if (sutra_name != target_val.get<std::string>()) {
+                if (target_val.is_string() && sutra_name != target_val.get<std::string>()) {
+                    match_conditions = false;
+                    break;
+                } else if (!target_val.is_string()) {
+                    // If target_val for gate_name is not a string, it's a mismatch
                     match_conditions = false;
                     break;
                 }
@@ -139,7 +137,7 @@ std::string processVedicSutra(const std::string& sutra_name, const std::string& 
     }
 
     // If no dynamic rule matched, proceed with static gate logic or default fallback
-    json output_json;
+    json output_json; // Declare output_json here
     output_json["status"] = "success"; // Default to success
     output_json["sutra"] = sutra_name;
 
@@ -166,6 +164,6 @@ std::string processVedicSutra(const std::string& sutra_name, const std::string& 
     } else {
         output_json["message"] = "No intervention required"; // Consistent fallback for unmatched inputs
     }
-    
+
     return output_json.dump();
 }
