@@ -9,7 +9,7 @@ int main() {
     std::cout << "=== DIVINE EARTHLY: NLP TOKENIZATION TEST WITH AKASHIC RECORDS ===\n\n";
 
     // 1. The Human Input
-    std::string prompt = "Initialize the sovereign quantum logic sequence for Divine Earthly.";
+    std::string prompt = "Execute the Maha Vakyas integration for universal consciousness.";
     std::cout << "[Human] Prompt: \"" << prompt << "\"\n\n";
 
     // 2. The Panini Tokenizer Buffer

@@ -1,32 +1,38 @@
 #include <iostream>
-#include "security/PanchaKoshaKernel.h"
-
-using namespace DivineEarthlyKernels::Security;
+#include <vector>
+#include <cstring>
+#include "memory/GarudaShredder.h"
 
 int main() {
-    std::cout << "=== Testing Level 55: Pancha Kosha Security System ===\n";
+    std::cout << "--- GARUDA SHREDDER: SECURITY VALIDATION TEST ---\n";
 
-    // 1. Configure Policies
-    PanchaKoshaKernel::configureKoshaPolicy(PanchaKoshaKernel::ANNAMAYA, {"read_thermal", "vibrate"});
-    PanchaKoshaKernel::configureKoshaPolicy(PanchaKoshaKernel::MANOMAYA, {"run_inference"});
+    // 1. Initialize 'sensitive' data
+    const std::string sensitive_data = "TOP_SECRET_VEDIC_KEY_777";
+    size_t size = sensitive_data.size();
+    char* buffer = new char[size + 1];
+    std::strcpy(buffer, sensitive_data.c_str());
 
-    // 2. Test Hardware Layer (Annamaya)
-    std::cout << "\n[Test 1] Valid Hardware Access:\n";
-    PanchaKoshaKernel::performSecurityCheck(PanchaKoshaKernel::ANNAMAYA, "read_thermal", "Temp_Daemon");
+    std::cout << "[Initial] Data in buffer: " << buffer << "\n";
 
-    std::cout << "\n[Test 2] Malicious Hardware Tamper:\n";
-    PanchaKoshaKernel::performSecurityCheck(PanchaKoshaKernel::ANNAMAYA, "physical_tamper", "Attacker_01");
+    // 2. Execute Garuda Shredder (Moksha Protocol)
+    std::cout << "[Action] Invoking Garuda Shredder dissolution...\n";
+    GarudaShredder::dissolve(buffer, size);
 
-    // 3. Test Sandbox Layer (Manomaya)
-    std::cout << "\n[Test 3] Valid Sandbox Execution:\n";
-    PanchaKoshaKernel::performSecurityCheck(PanchaKoshaKernel::MANOMAYA, "run_inference", "AI_Sandbox");
+    // 3. Post-Shredding Inspection
+    bool data_cleared = true;
+    for(size_t i = 0; i < size; ++i) {
+        if(buffer[i] == sensitive_data[i]) {
+            data_cleared = false;
+            break;
+        }
+    }
 
-    std::cout << "\n[Test 4] Sandbox Escape Attempt:\n";
-    PanchaKoshaKernel::performSecurityCheck(PanchaKoshaKernel::MANOMAYA, "sandbox_escape", "Untrusted_Process");
+    if(data_cleared) {
+        std::cout << "[Success] Verification: Sensitive data obliterated from memory.\n";
+    } else {
+        std::cout << "[Failure] Verification: Sensitive remnants detected in buffer.\n";
+    }
 
-    // 4. Test Root Layer (Anandamaya)
-    std::cout << "\n[Test 5] Unauthorized Root Modification:\n";
-    PanchaKoshaKernel::performSecurityCheck(PanchaKoshaKernel::ANANDAMAYA, "modify_root_singularity", "User_App");
-
-    return 0;
+    delete[] buffer;
+    return data_cleared ? 0 : 1;
 }
