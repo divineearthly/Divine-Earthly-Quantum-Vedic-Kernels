@@ -1,33 +1,20 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -O3 -Iinclude
+CXXFLAGS = -std=c++17 -O3 -march=native -ffast-math -Wall -Iinclude
 
-BUILD_DIR = build
+all: build_dir divine_kernel sovereign_demo
 
-# Source files
-SRCS = main.cpp \
-       memory/GarudaShredder.cpp \
-       compute/YogaAttention.cpp \
-       memory/AkashicRecords.cpp
+build_dir:
+	mkdir -p build
 
-# Object files will be placed in BUILD_DIR
-# The patsubst function needs to handle source files in subdirectories
-OBJS = $(addprefix $(BUILD_DIR)/, $(patsubst %.cpp,%.o,$(SRCS)))
+divine_kernel:
+	$(CXX) $(CXXFLAGS) main.cpp memory/GarudaShredder.cpp compute/YogaAttention.cpp memory/AkashicRecords.cpp -o build/divine_kernel
 
-TARGET = $(BUILD_DIR)/divine_kernel
-
-all: $(TARGET)
-
-$(TARGET): $(OBJS)
-	@mkdir -p $(BUILD_DIR)
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
-
-# Generic rule to compile .cpp files into .o files
-# This rule needs to handle sources in subdirectories and place objects in corresponding build subdirectories
-$(BUILD_DIR)/%.o: %.cpp
-	@mkdir -p $(dir $@)
-	@echo "Compiling $<..."
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+sovereign_demo:
+	$(CXX) $(CXXFLAGS) sovereign_inference_demo.cpp memory/GarudaShredder.cpp -o build/sovereign_demo
 
 clean:
 	@echo "Executing Moksha Protocol (Cleaning build)..."
-	rm -rf $(BUILD_DIR)/*
+	rm -rf build/*
+
+run_demo:
+	./build/sovereign_demo

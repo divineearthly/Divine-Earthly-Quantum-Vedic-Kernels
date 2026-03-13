@@ -28,3 +28,24 @@ The system architecture is a direct mapping of 64 Vedic philosophical and mathem
 **Mission:** Optimizing the intersection of Vedic Science and Quantum Logic for a Sovereign Bio-Digital Intelligence.
 
 Divine Earthly is more than a kernel; it is a blueprint for decentralized intelligence that remains independent of centralized cloud infrastructure, ensuring true data sovereignty and computational autonomy.
+## Architecture & Performance
+
+### BinduComputeEngine & SutraRegistry
+The engine uses a centralized `SutraRegistry` to map Vedic algorithms to computational kernels. The `BinduComputeEngine` handles task routing and execution flow, ensuring high-performance dispatching.
+
+
+### Performance Metrics Summary
+- **Matrix Multiplication (Vedic UT vs Naive)**: ~1.42x Speedup
+- **Meru Prastara (Pingala vs Naive Pascal)**: ~36.83x Speedup
+
+
+### Build & Run Instructions
+```bash
+# To run benchmarks
+g++ -std=c++17 -O3 -march=native -I./include benchmark_suite.cpp include/compute/PingalaChandaSutras.cpp -o benchmark_runner
+./benchmark_runner
+
+# To run unit tests
+g++ -std=c++17 -O3 -I./include test_suite.cpp include/compute/PingalaChandaSutras.cpp include/nlp/PaniniAshtadhyayi.cpp -o unit_tester
+./unit_tester
+```
