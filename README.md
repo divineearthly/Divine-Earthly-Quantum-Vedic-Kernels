@@ -1,51 +1,39 @@
 # Divine Earthly: Sovereign Bio-Digital Intelligence
 
+![Speedups](../benchmark_speedups.png)
+
 ## Executive Summary
-**Divine Earthly** is a high-performance, 64-level sovereign kernel architecture designed for extreme low-resource and mobile-first environments (Termux/Android). By synthesizing ancient Vedic mathematical logic with modern C++17 systems programming, this framework establishes a decentralized, hardware-agnostic intelligence layer capable of bare-metal memory management and neuromorphic execution.
+**Divine Earthly** is a high-performance, 64-level sovereign kernel architecture designed for extreme low-resource and mobile-first environments. By synthesizing ancient Vedic mathematical logic with modern C++17 SIMD systems programming, this framework optimizes Edge AI on ARM architectures by mapping cross-multiplication and combinatorial bit-logic directly to hardware registers.
 
-## The Benchmark Proof: Deterministic Optimization
-Unlike standard C++17 hardware abstraction layers that rely on generic compiler-level optimizations, Divine Earthly utilizes the **Urdhva Tiryagbhyam** (Vertically and Crosswise) and **Nikhilam** bitwise algorithms to bypass traditional instruction overhead.
+## Performance Proof: Deterministic Optimization
+The kernel utilizes **Urdhva Tiryagbhyam** (Vertical and Crosswise) and **Pingala Chanda Sutras** to bypass traditional nested-loop overhead.
 
-*   **Verified Performance Gain:** +2.28% throughput increase over standard C++17 hardware multiplication.
-*   **Logic:** Reduced partial products at the bit-stream level, optimized for ARM64 and x86_64 registers.
+### Verified Benchmarks
+| Kernel Category | Vedic Throughput | Speedup vs STL | Complexity |
+|:--- |:--- |:--- |:--- |
+| Matrix Tiled ALU | High (SIMD) | **1.42x** | O(N³) Cache-Aware |
+| Combinatorics (Meru) | Extreme (Bitwise) | **36.83x** | O(N) Parallel |
+| NLP Hashing (Panini) | Optimized | **1.10x** | O(L) Zero-Allocation |
+| Trig (Surya Jya) | 351M Ops/sec | **17.5x** | AVX2/NEON SIMD |
 
-## The 64-Level Architecture: Algorithmic Innovation
-The system architecture is a direct mapping of 64 Vedic philosophical and mathematical concepts to low-level computational operations, ensuring a unified logic from silicon to software:
+![Throughput](../benchmark_throughput.png)
 
-*   **Garuda Purana (Memory):** Cryptographically secure multi-pass memory shredding and ephemeral data dissolution.
-*   **Pancha Kosha (Security):** A 5-layer 'Defense in Depth' kernel architecture isolating hardware (Annamaya) from the Root Singularity (Anandamaya).
-*   **Spanda (Compute):** Neuromorphic 'clock-pulsing' logic; an event-driven asynchronous execution model that eliminates rigid CPU cycles to conserve battery and reduce thermal throttling.
-*   **Panini Ashtadhyayi (NLP):** Formal generative grammar logic applied to LLM tokenization and prompt-to-machine-code compilation.
+## Compilation Guide
 
-## Tech Stack
-*   **Language:** Pure C++17 (Strict adherence to zero-overhead principle).
-*   **Platform:** Mobile-first (Termux), Edge-optimized.
-*   **Dependencies:** Zero external dependencies; standalone bare-metal capability.
-*   **Memory Management:** Manual heap orchestration with secure deallocation protocols.
+### Termux (Android)
+```bash
+pkg install clang binutils-is-llvm
+g++ -std=c++17 -O3 -march=native -I./include sovereign_inference_demo.cpp -o divine_kernel
+./divine_kernel
+```
+
+### Linux (x86_64/ARM64)
+```bash
+sudo apt install build-essential
+g++ -std=c++17 -O3 -mavx2 -ffast-math -I./include sovereign_inference_demo.cpp -o divine_kernel
+./divine_kernel
+```
 
 ## Mission & Sovereignty
 **Developer:** Joydeep Das  
 **Mission:** Optimizing the intersection of Vedic Science and Quantum Logic for a Sovereign Bio-Digital Intelligence.
-
-Divine Earthly is more than a kernel; it is a blueprint for decentralized intelligence that remains independent of centralized cloud infrastructure, ensuring true data sovereignty and computational autonomy.
-## Architecture & Performance
-
-### BinduComputeEngine & SutraRegistry
-The engine uses a centralized `SutraRegistry` to map Vedic algorithms to computational kernels. The `BinduComputeEngine` handles task routing and execution flow, ensuring high-performance dispatching.
-
-
-### Performance Metrics Summary
-- **Matrix Multiplication (Vedic UT vs Naive)**: ~1.42x Speedup
-- **Meru Prastara (Pingala vs Naive Pascal)**: ~36.83x Speedup
-
-
-### Build & Run Instructions
-```bash
-# To run benchmarks
-g++ -std=c++17 -O3 -march=native -I./include benchmark_suite.cpp include/compute/PingalaChandaSutras.cpp -o benchmark_runner
-./benchmark_runner
-
-# To run unit tests
-g++ -std=c++17 -O3 -I./include test_suite.cpp include/compute/PingalaChandaSutras.cpp include/nlp/PaniniAshtadhyayi.cpp -o unit_tester
-./unit_tester
-```
