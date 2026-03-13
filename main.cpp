@@ -1,20 +1,43 @@
 #include <iostream>
-#include "DivineMaster.h"
-#include "core/DivineKernel.h"
+#include <vector>
+#include <chrono>
+#include "io/PaniniNLP.h"
+#include "memory/GarudaShredder.h"
 
 int main() {
-    try {
-        std::cout << "=== DIVINE EARTHLY SOVEREIGN KERNEL v1.5 ===\n";
-        std::cout << "Status: 64 Sutras Integrated | Performance: +2.28% Opt.\n\n";
+    std::cout << "=== DIVINE EARTHLY: NLP TOKENIZATION TEST ===\n\n";
 
-        // Initialize the core using the default constructor
-        DivineKernel core; 
-        
-        SovereignOrchestrator::initializeFullSystem(core);
+        // 1. The Human Input
+            std::string prompt = "Initialize the sovereign quantum logic sequence for Divine Earthly.";
+                std::cout << "[Human] Prompt: \"" << prompt << "\"\n\n";
 
-        std::cout << "\n[Success] Kernel operating in Turiya state.\n";
-    } catch (...) {
-        std::cerr << "[Error] System reset required. Entropy high.\n";
-    }
-    return 0; 
-}
+                    // 2. The Panini Tokenizer Buffer
+                        std::vector<uint32_t> secureTokenBuffer;
+
+                            // 3. Benchmark the Tokenization
+                                auto startNLP = std::chrono::high_resolution_clock::now();
+                                    
+                                        PaniniTokenizer::processSentence(prompt, secureTokenBuffer);
+                                            
+                                                auto endNLP = std::chrono::high_resolution_clock::now();
+                                                    std::chrono::duration<double, std::milli> timeNLP = endNLP - startNLP;
+
+                                                        // 4. Display the resulting Mathematical Tokens
+                                                            std::cout << "\n[Sattva] Token Stream Output (Ready for Vector ALU):\n[ ";
+                                                                for(uint32_t token : secureTokenBuffer) {
+                                                                        std::cout << token << " ";
+                                                                            }
+                                                                                std::cout << "]\n";
+                                                                                    
+                                                                                        std::cout << "\n[Result] Sentence tokenized in: " << timeNLP.count() << " ms\n\n";
+
+                                                                                            // 5. Secure Hardware Wipe (Moksha)
+                                                                                                std::cout << "[Moksha] Prompt ingested. Shredding token buffer to prevent memory leaks...\n";
+                                                                                                    GarudaShredder::dissolve(secureTokenBuffer.data(), secureTokenBuffer.size() * sizeof(uint32_t));
+                                                                                                        secureTokenBuffer.clear();
+
+                                                                                                            std::cout << "[Success] NLP pipeline clear. Awaiting next command.\n";
+
+                                                                                                                return 0;
+                                                                                                                }
+                                                                                                                
