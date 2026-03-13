@@ -1,6 +1,6 @@
 # Divine Earthly: Sovereign Bio-Digital Intelligence
 
-![Speedups](../benchmark_speedups.png)
+![Speedups](benchmark_speedups.png)
 
 ## Executive Summary
 **Divine Earthly** is a high-performance, 64-level sovereign kernel architecture designed for extreme low-resource and mobile-first environments. By synthesizing ancient Vedic mathematical logic with modern C++17 SIMD systems programming, this framework optimizes Edge AI on ARM architectures by mapping cross-multiplication and combinatorial bit-logic directly to hardware registers.
@@ -16,7 +16,7 @@ The kernel utilizes **Urdhva Tiryagbhyam** (Vertical and Crosswise) and **Pingal
 | NLP Hashing (Panini) | Optimized | **1.10x** | O(L) Zero-Allocation |
 | Trig (Surya Jya) | 351M Ops/sec | **17.5x** | AVX2/NEON SIMD |
 
-![Throughput](../benchmark_throughput.png)
+![Throughput](benchmark_throughput.png)
 
 ## Compilation Guide
 
@@ -35,5 +35,5 @@ g++ -std=c++17 -O3 -mavx2 -ffast-math -I./include sovereign_inference_demo.cpp -
 ```
 
 ## Mission & Sovereignty
-**Developer:** Joydeep Das  
+**Developer:** Joydeep Das
 **Mission:** Optimizing the intersection of Vedic Science and Quantum Logic for a Sovereign Bio-Digital Intelligence.
