@@ -11,7 +11,7 @@ The kernel utilizes **Urdhva Tiryagbhyam** (Vertical and Crosswise) and **Pingal
 ### Verified Benchmarks
 | Kernel Category | Vedic Throughput | Speedup vs STL | Complexity |
 |:--- |:--- |:--- |:--- |
-| Matrix Tiled ALU | High (SIMD) | **1.42x** | O(N³) Cache-Aware |
+| Matrix Tiled ALU | High (SIMD) | **1.42x** | O(N3) Cache-Aware |
 | Combinatorics (Meru) | Extreme (Bitwise) | **36.83x** | O(N) Parallel |
 | NLP Hashing (Panini) | Optimized | **1.10x** | O(L) Zero-Allocation |
 | Trig (Surya Jya) | 351M Ops/sec | **17.5x** | AVX2/NEON SIMD |
