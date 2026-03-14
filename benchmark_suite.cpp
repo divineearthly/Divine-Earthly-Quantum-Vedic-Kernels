@@ -4,7 +4,7 @@
 #include <iomanip>
 #include <cmath>
 #include "compute/VedicALU.h"
-#include "compute/PingalaChandaSutras.h"
+#include "include/compute/PingalaChandaSutras.h"
 
 using namespace DivineEarthlyKernels::Compute;
 

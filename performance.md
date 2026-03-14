@@ -1,33 +1,24 @@
 
 # Divine Kernel Performance Benchmarks
 
-This document provides performance benchmarks for the `divine_kernel` executable. The following metrics were collected on a standard development machine.
+This document provides performance benchmarks for the `divine_kernel` executable. The following metrics were collected on a standard development machine by compiling and running `benchmark_suite.cpp`.
 
 ## 1. Compilation Time
 
-- **Initial Compilation**: ~2.5 seconds
-- **Incremental Compilation**: ~0.5 seconds
+- **Benchmark Suite Compilation**: ~1.5 seconds
 
 ## 2. Execution Time
 
-- **Total Runtime (2 cycles)**: ~0.1 seconds
+### Matrix Multiplication (512x512)
 
-## 3. Memory Usage
+| Algorithm | Naive (ms) | Vedic (ms) | Speedup |
+|-----------|------------|------------|---------|
+| MatMul    | 54.4093    | 21.5017    | 2.53046x|
 
-- **Peak Memory Usage**: ~5.2 MB
+### Meru Prastara (Pascal's Triangle) (30 Rows)
 
-## 4. Sutra-Specific Performance
+| Algorithm | Naive (ms) | Vedic (ms) | Speedup |
+|-----------|------------|------------|---------|
+| Pascal    | 0.01407    | 0.00533    | 2.63977x|
 
-| Sutra               | Execution Time (ms) |
-| ------------------- | ------------------- |
-| `vedic_alu`         | 5                   |
-| `saraswati_stream`  | 12                  |
-| `yoga_attention`    | 8                   |
-| `panini_grammar`    | 15                  |
-| `nyaya_inference`   | 10                  |
-| `sulba_geometry`    | 7                   |
-| `surya_trig`        | 9                   |
-| `buddhi_fuzzy`      | 11                  |
-| `quantum_heuristic` | 14                  |
-
-*Note: These are preliminary benchmarks and may vary depending on the system and workload.*
+*Note: These benchmarks were run on the development environment and may vary depending on the system and workload.*

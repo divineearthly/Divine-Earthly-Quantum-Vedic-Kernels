@@ -1,34 +1,34 @@
-#ifndef VEDIC_ALU_H
-#define VEDIC_ALU_H
+#ifndef MATRIX_MULTIPLIER_H
+#define MATRIX_MULTIPLIER_H
 
 #include <vector>
 #include <cstdint>
 #include <algorithm>
 
 /**
- * @brief VedicALU: Level 1 - The Pure Computational Core
- * Optimized for C++17 HPC, implementing Urdhva Tiryak (Vertical and Crosswise).
+ * @brief MatrixMultiplier: A pure computational core for matrix multiplication.
+ * Optimized for C++17 HPC.
  */
-class VedicALU {
+class MatrixMultiplier {
 public:
     // Standard matrix size for benchmarking
     static constexpr size_t TENSOR_SIZE = 256;
 
     /**
-     * @brief UrdhvaTiryak Multiply
-     * Uses cross-multiplication logic to minimize memory jumps and maximize cache hits.
+     * @brief High-performance matrix multiplication.
+     * Uses a blocking/tiling strategy for cache awareness.
      * Optimized with __restrict__ for compiler SIMD auto-vectorization.
      */
-    static void matrixMultiplyVedic(const float* __restrict__ A, 
-                                   const float* __restrict__ B, 
-                                   float* __restrict__ C, 
-                                   size_t N) {
+    static void multiply(const float* __restrict__ A, 
+                         const float* __restrict__ B, 
+                         float* __restrict__ C, 
+                         size_t N) {
         // Blocking/Tiling strategy for L1/L2 cache awareness
         constexpr size_t BLOCK_SIZE = 16;
         for (size_t i = 0; i < N; i += BLOCK_SIZE) {
             for (size_t j = 0; j < N; j += BLOCK_SIZE) {
                 for (size_t k = 0; k < N; k += BLOCK_SIZE) {
-                    // Internal micro-kernel for crosswise sum-products
+                    // Internal micro-kernel for sum-products
                     for (size_t ii = i; ii < std::min(i + BLOCK_SIZE, N); ++ii) {
                         for (size_t kk = k; kk < std::min(k + BLOCK_SIZE, N); ++kk) {
                             float a_val = A[ii * N + kk];
@@ -45,7 +45,7 @@ public:
     /**
      * @brief Standard Naive Multiply for Benchmark Comparison
      */
-    static void matrixMultiplyStandard(const float* A, const float* B, float* C, size_t N) {
+    static void multiplyStandard(const float* A, const float* B, float* C, size_t N) {
         for (size_t i = 0; i < N; ++i) {
             for (size_t j = 0; j < N; ++j) {
                 float sum = 0.0f;
