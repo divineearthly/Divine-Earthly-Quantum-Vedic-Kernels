@@ -1,9 +1,4 @@
-#include "DivineKernel.h"
+#include "include/core/DivineKernel.h"
 
-IBrahman::execute(input) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-IBrahman::terminate() {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+// All methods are defined in the header.
+// This file is kept for consistency.

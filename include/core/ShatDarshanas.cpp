@@ -1,9 +1,4 @@
-#include "ShatDarshanas.h"
+#include "include/core/ShatDarshanas.h"
 
-ShatDarshanas::code_function() {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-ShatDarshanas::suggestOptimalParadigm("manage database transactions with complex rules") {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+// The implementation for ShatDarshanas is provided inline in the header file.
+// This file is included in the build but does not need to provide any symbols.

@@ -1,5 +1,3 @@
-#include "VedicMatrix.h"
+#include "include/compute/VedicMatrix.h"
 
-VedicMatrix::multiply2x2(A, B, C) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+// Implementation is in the header. This file is for structure.

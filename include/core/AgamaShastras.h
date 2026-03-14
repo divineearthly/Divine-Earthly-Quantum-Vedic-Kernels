@@ -23,6 +23,9 @@ public:
         std::function<std::string(const std::map<std::string, std::string>&)> handler;
         bool requiresAuthentication;
 
+        // Default constructor for map compatibility
+        ApiEndpoint() : requiresAuthentication(false) {}
+
         ApiEndpoint(std::string n, std::string p, std::string m, std::function<std::string(const std::map<std::string, std::string>&)> h, bool auth = false)
             : name(n), path(p), method(m), handler(h), requiresAuthentication(auth) {}
     };
@@ -79,7 +82,7 @@ public:
         // Define a simple GET endpoint
         ApiEndpoint getDataEndpoint(
             "Get_System_Status", "/status", "GET",
-            [](const std::map<std::string, std::string>& params) {
+            [](const std::map<std::string, std::string>& params) -> std::string {
                 return "System Status: Operational. Uptime: 1234s.";
             }
         );
@@ -88,11 +91,11 @@ public:
         // Define a POST endpoint requiring authentication
         ApiEndpoint updateConfigEndpoint(
             "Update_Configuration", "/config", "POST",
-            [](const std::map<std::string, std::string>& params) {
+            [](const std::map<std::string, std::string>& params) -> std::string {
                 if (params.count("setting") && params.count("value")) {
                     return "Config updated: " + params.at("setting") + " = " + params.at("value") + ".";
                 } else {
-                    return "ERROR: Missing setting or value parameters.";
+                    return std::string("ERROR: Missing setting or value parameters.");
                 }
             }, true
         );

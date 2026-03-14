@@ -1,17 +1,8 @@
-#include "MokshaProtocol.h"
+#include "include/core/MokshaProtocol.h"
 
-MokshaProtocol::initiateTermination("AI_Agent_Task_Alpha") {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+namespace DivineEarthlyKernels::Core {
 
-MokshaProtocol::isTerminated("AI_Agent_Task_Alpha") {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+// All methods are defined in the header.
+// This file is kept for consistency.
 
-MokshaProtocol::initiateTermination("Ephemeral_Compute_Node_XYZ") {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-MokshaProtocol::isTerminated("Ephemeral_Compute_Node_XYZ") {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+} // namespace DivineEarthlyKernels::Core

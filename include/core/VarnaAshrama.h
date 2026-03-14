@@ -61,10 +61,10 @@ public:
     static void allocateResources(const std::string& tenant_id, TenantVarna varna, double requested_cpu_percent, size_t requested_ram_mb) {
         std::cout << "[VarnaAshrama] Allocating resources for tenant '" << tenant_id << "' (Varna: ";
         switch (varna) {
-            case BRAHMIN: std::cout << "BRAHMIN - High Priority"); break;
-            case KSHATRIYA: std::cout << "KSHATRIYA - Medium Priority"); break;
-            case VAISHYA: std::cout << "VAISHYA - Low Priority"); break;
-            case SHUDRA: std::cout << "SHUDRA - Minimal Priority"); break;
+            case BRAHMIN: std::cout << "BRAHMIN - High Priority"; break;
+            case KSHATRIYA: std::cout << "KSHATRIYA - Medium Priority"; break;
+            case VAISHYA: std::cout << "VAISHYA - Low Priority"; break;
+            case SHUDRA: std::cout << "SHUDRA - Minimal Priority"; break;
         }
         std::cout << ").\n";
 

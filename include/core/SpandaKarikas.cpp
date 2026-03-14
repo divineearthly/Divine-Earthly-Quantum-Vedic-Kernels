@@ -1,19 +1,4 @@
-#include "SpandaKarikas.h"
+#include "include/core/SpandaKarikas.h"
 
-pulse SpandaKarikas::on_pulse_received(data_payload) {
-    // TODO: Implement Level logic based on Vedic Sutra
-    return {};
-}
-
-time SpandaKarikas::task_function() {
-    // TODO: Implement Level logic based on Vedic Sutra
-    return {};
-}
-
-SpandaKarikas::detach() {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-SpandaKarikas::activateModuleOnEvent("Security_Monitor", "Intrusion_Alert") {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+// The implementation for SpandaKarikas is provided inline in the header file.
+// This file is included in the build but does not need to provide any symbols.

@@ -6,6 +6,8 @@
 #include <string>
 #include <map>
 #include <numeric> // For std::accumulate
+#include <algorithm> // For std::sort
+#include <cmath>     // For std::sqrt, std::pow
 
 namespace DivineEarthlyKernels {
 namespace Core {

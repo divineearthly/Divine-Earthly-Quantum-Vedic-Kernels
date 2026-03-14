@@ -1,18 +1,8 @@
-#include "MahaVakyas.h"
+#include "include/core/MahaVakyas.h"
 
-MahaVakyas::assertIdentity(ahamBrahmasmi) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+namespace DivineEarthlyKernels::Core {
 
-Pronouncement MahaVakyas::tatTvamAsi("Tat Tvam Asi", "Thou art That.") {
-    // TODO: Implement Level logic based on Vedic Sutra
-    return {};
-}
+// All methods are defined in the header.
+// This file is kept for consistency.
 
-MahaVakyas::assertIdentity(tatTvamAsi) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-MahaVakyas::integrateLocalizedNodes({"Edge_Node_Alpha", "Cloud_Compute_Omega", "Mobile_Unit_Theta"}) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+} // namespace DivineEarthlyKernels::Core

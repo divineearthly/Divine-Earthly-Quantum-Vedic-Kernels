@@ -4,6 +4,7 @@
 #include <cstdint> // For uint16_t, etc.
 #include <iostream>
 #include <string>
+#include <vector>
 
 namespace DivineEarthlyKernels {
 namespace Compute {
@@ -45,47 +46,13 @@ public:
 
     // Upa-Sutra: Adyamadyenantyamantyena (First by first and last by last)
     // Application: Optimizing array boundary calculations, vector mathematics.
-    static void processArrayBoundaries(const std::vector<int>& arr) {
-        if (arr.empty()) {
-            std::cout << "[Upa-Sutra] Adyamadyenantyamantyena: Array is empty. No boundaries to process.\n";
-            return;
-        }
-        std::cout << "[Upa-Sutra] Adyamadyenantyamantyena: First element: " << arr.front() 
-                  << ", Last element: " << arr.back() << ".\n";
-    }
+    static void processArrayBoundaries(const std::vector<int>& arr);
 
     // Upa-Sutra: Lopanasthapanabhyam (By alternate elimination and retention)
     // Application: Highly efficient garbage collection, memory freeing logic, and managing attention head dropouts.
-    static std::vector<int> filterAlternating(const std::vector<int>& data) {
-        std::vector<int> result;
-        std::cout << "[Upa-Sutra] Lopanasthapanabhyam: Alternately eliminating and retaining elements.\n";
-        for (size_t i = 0; i < data.size(); ++i) {
-            if (i % 2 == 0) { // Retain even indexed elements
-                result.push_back(data[i]);
-            } else { // Eliminate odd indexed elements
-                // Optionally log elimination
-            }
-        }
-        std::cout << "[Upa-Sutra] Retained " << result.size() << " elements.\n";
-        return result;
-    }
+    static std::vector<int> filterAlternating(const std::vector<int>& data);
 
-    static void demonstrate() {
-        std::cout << "\n--- Demonstrating Level 21: Vedic Upa-Sutras ---\n";
-        squareEndingIn5(35);
-        squareEndingIn5(12);
-        nikhilamMultiply(65530, 65530);
-
-        std::vector<int> my_array = {10, 20, 30, 40, 50};
-        processArrayBoundaries(my_array);
-
-        std::vector<int> filtered_data = filterAlternating({1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
-        std::cout << "Filtered data: ";
-        for(int val : filtered_data) {
-            std::cout << val << " ";
-        }
-        std::cout << "\n";
-    }
+    static void demonstrate();
 };
 
 } // namespace Compute

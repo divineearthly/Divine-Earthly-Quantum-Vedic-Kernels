@@ -63,8 +63,7 @@ public:
 
     // Simulates the entire neural network training process (conceptual).
     static void trainNetwork(std::vector<NeuralLayer>& network_layers, const std::vector<double>& training_input, const std::vector<double>& target_output, double learning_rate, int epochs) {
-        std::cout << "[Kundalini] Initiating neural network training (Conceptual)...
-";
+        std::cout << "[Kundalini] Initiating neural network training (Conceptual)...\n";
         for (int epoch = 0; epoch < epochs; ++epoch) {
             std::cout << "\n-- Epoch " << (epoch + 1) << " --\n";
             std::vector<double> current_output = training_input;
@@ -88,8 +87,7 @@ public:
                 // In a real system, 'errors_for_prev_layer' would be calculated based on layer weights
             }
         }
-        std::cout << "[Kundalini] Neural network training completed (Conceptual).
-";
+        std::cout << "[Kundalini] Neural network training completed (Conceptual).\n";
     }
 
     static void demonstrate() {

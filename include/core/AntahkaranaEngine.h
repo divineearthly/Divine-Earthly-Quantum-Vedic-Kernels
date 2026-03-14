@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <thread>
+#include <functional>
 
 /**
  * @brief Level 50 - AntahkaranaEngine: The Primary Task Scheduler
@@ -19,7 +20,7 @@ public:
 
     void parallel_invoke(const std::vector<std::function<void()>>& tasks) {
         std::vector<std::thread> pool;
-        for(auto& task : tasks) {
+        for(const auto& task : tasks) {
             pool.emplace_back(task);
         }
         for(auto& t : pool) {

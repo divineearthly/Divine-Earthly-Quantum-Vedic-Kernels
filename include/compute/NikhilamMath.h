@@ -9,5 +9,6 @@
 class NikhilamMath {
 public:
     static uint64_t multiply(uint64_t a, uint64_t b, uint64_t base);
+    static uint64_t subtract(uint64_t a, uint64_t b);
 };
 #endif

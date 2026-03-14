@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <functional> // For std::function
+#include <map> // For std::map
 
 namespace DivineEarthlyKernels {
 namespace Core {
@@ -51,7 +52,7 @@ public:
     }
 
     static void demonstrate() {
-        std::cout << "\n--- Demonstrating Level 38: Kalpa Sutras (Initialization & Boot Sequence) ---\n";
+        std::cout << "\n--- Demonstrating Level 38: Kalpa Sutras (Initialization & Boot Sequence) ---";
 
         std::vector<InitializationStep> primaryBoot = {
             {"PowerOnSelfTest", "Verifying hardware integrity.", [](){ return true; }},

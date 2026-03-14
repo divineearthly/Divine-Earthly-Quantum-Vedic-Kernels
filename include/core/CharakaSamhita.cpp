@@ -1,45 +1,8 @@
-#include "CharakaSamhita.h"
+#include "include/core/CharakaSamhita.h"
 
-CharakaSamhita::push_back(VATA_IMBALANCE) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+namespace DivineEarthlyKernels::Core {
 
-CharakaSamhita::push_back(VATA_IMBALANCE) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+// All methods are defined in the header.
+// This file is kept for consistency.
 
-CharakaSamhita::push_back(PITTA_IMBALANCE) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-CharakaSamhita::push_back(PITTA_IMBALANCE) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-CharakaSamhita::push_back(KAPHA_IMBALANCE) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-CharakaSamhita::push_back(KAPHA_IMBALANCE) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-CharakaSamhita::push_back(DOSHA_BALANCED) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-CharakaSamhita::diagnoseSystem(metrics1) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-CharakaSamhita::applySelfHealing(imbalances1) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-CharakaSamhita::diagnoseSystem(metrics2) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-CharakaSamhita::applySelfHealing(imbalances2) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+} // namespace DivineEarthlyKernels::Core

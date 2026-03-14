@@ -1,17 +1,8 @@
-#include "MandukyaUpanishad.h"
+#include "include/core/MandukyaUpanishad.h"
 
-MandukyaUpanishad::transitionState(SVAPNA) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+namespace DivineEarthlyKernels::Core {
 
-MandukyaUpanishad::transitionState(SUSHUPTI) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+// All methods are defined in the header.
+// This file is kept for consistency.
 
-MandukyaUpanishad::transitionState(TURIYA) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-MandukyaUpanishad::transitionState(JAGRAT) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+} // namespace DivineEarthlyKernels::Core

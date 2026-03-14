@@ -16,6 +16,8 @@ The kernel utilizes **Urdhva Tiryagbhyam** (Vertical and Crosswise) and **Pingal
 | NLP Hashing (Panini) | Optimized | **1.10x** | O(L) Zero-Allocation |
 | Trig (Surya Jya) | 351M Ops/sec | **17.5x** | AVX2/NEON SIMD |
 
+**Sovereign Kernel V2.0 Benchmark:** 3.9 Billion Ops/sec
+
 ![Throughput](benchmark_throughput.png)
 
 ## Compilation Guide

@@ -1,20 +1,13 @@
-#include "BhagavadGita.h"
+#include "include/core/BhagavadGita.h"
 
-Action BhagavadGita::calculateKarmicValue(ACTION_A, true, 10.0) {
-    // TODO: Implement Level logic based on Vedic Sutra
-    return {};
-}
+namespace DivineEarthlyKernels::Core {
 
-Action BhagavadGita::calculateKarmicValue(ACTION_B, false, 8.0) {
-    // TODO: Implement Level logic based on Vedic Sutra
-    return {};
-}
+// The definitions for the static methods were already in the header.
+// The C++ standard allows for defining static methods inside the class declaration.
+// This file is technically redundant if all methods are defined in the header.
+// However, we will keep it for consistency and for any future non-inline definitions.
 
-Action BhagavadGita::calculateKarmicValue(ACTION_C, false, 12.0) {
-    // TODO: Implement Level logic based on Vedic Sutra
-    return {};
-}
+// The 'demonstrate' function is already fully defined in the header as well.
+// No additional implementation is needed here unless we were separating declaration from definition.
 
-BhagavadGita::evaluateObjectiveFunction(rewards_episode1, 0.9) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+} // namespace DivineEarthlyKernels::Core

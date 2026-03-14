@@ -1,25 +1,4 @@
-#include "AgamaShastras.h"
+#include "include/core/AgamaShastras.h"
 
-AgamaShastras::at(key) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-AgamaShastras::handler(params) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-AgamaShastras::registerEndpoint(api_registry, getDataEndpoint) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-AgamaShastras::registerEndpoint(api_registry, updateConfigEndpoint) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-AgamaShastras::validateDataFormat(valid_data, {"user_id", "transaction_id"}) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-AgamaShastras::validateDataFormat(valid_data, required_order_fields) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+// The implementation for AgamaShastras is provided inline in the header file.
+// This file is included in the build but does not need to provide any symbols.

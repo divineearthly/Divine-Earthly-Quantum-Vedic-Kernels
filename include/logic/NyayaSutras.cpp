@@ -1,9 +1,4 @@
-#include "logic/NyayaSutras.h"
-#include <iostream>
+#include "include/logic/NyayaSutras.h"
 
-namespace DivineEarthlyKernels::Logic {
-bool NyayaSutras::infer(const std::string& premise, const std::string& conclusion) {
-    // Symbolic Logic: If premise contains keyword, conclude validity
-    return premise.find("Veda") != std::string::npos;
-}
-}
+// The implementation for NyayaSutras is provided inline in the header file.
+// This file is included in the build but does not need to provide any symbols.

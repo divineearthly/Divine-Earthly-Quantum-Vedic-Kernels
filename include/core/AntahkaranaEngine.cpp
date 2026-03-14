@@ -1,13 +1,4 @@
-#include "AntahkaranaEngine.h"
+#include "include/core/AntahkaranaEngine.h"
 
-AntahkaranaEngine::hardware_concurrency() {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-AntahkaranaEngine::emplace_back(task) {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
-
-AntahkaranaEngine::join() {
-    // TODO: Implement Level logic based on Vedic Sutra
-}
+// The implementation for AntahkaranaEngine is provided inline in the header file.
+// This file is included in the build but does not need to provide any symbols.

@@ -7,6 +7,7 @@
 #include <map>
 #include <chrono> // For time operations
 #include <functional> // For std::function
+#include <thread>
 
 namespace DivineEarthlyKernels {
 namespace Core {

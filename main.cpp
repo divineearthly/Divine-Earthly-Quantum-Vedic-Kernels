@@ -1,47 +1,39 @@
-#include <iostream>
-#include <vector>
-#include <chrono>
-#include "io/PaniniNLP.h"
-#include "memory/GarudaShredder.h"
-#include "memory/AkashicRecords.h" // Include AkashicRecords.h
+#include "include/core/TheYugas.h"
+#include "include/core/ThreeGunas.h"
+#include "include/compute/VedicKernels.h"
+#include "include/memory/YogaSutras.h"
+#include "include/memory/Puranas.h"
+#include "include/memory/AkashicRecords.h"
+#include "include/memory/ChittaBuffer.h"
+#include <memory>
+
+// Using declarations for the core components
+using DivineEarthlyKernels::Core::TheYugas;
+using DivineEarthlyKernels::Core::ThreeGunas;
+using DivineEarthlyKernels::Core::SystemGuna;
 
 int main() {
-    std::cout << "=== DIVINE EARTHLY: NLP TOKENIZATION TEST WITH AKASHIC RECORDS ===\n\n";
+    // 1. Initialize the Core State & Power Manager
+    ThreeGunas stateManager;
 
-    // 1. The Human Input
-    std::string prompt = "Execute the Maha Vakyas integration for universal consciousness.";
-    std::cout << "[Human] Prompt: \"" << prompt << "\"\n\n";
+    // 2. Register the Vedic Compute Kernels with the State Manager
+    stateManager.registerKernel(std::make_shared<UrdhvaTiryagbhyamKernel>());
+    stateManager.registerKernel(std::make_shared<NikhilamKernel>());
 
-    // 2. The Panini Tokenizer Buffer
-    std::vector<uint32_t> secureTokenBuffer;
+    // 3. Initialize the System Scheduler (The Yugas)
+    // The scheduler is linked to the state manager to control its state.
+    TheYugas scheduler(stateManager);
 
-    // 3. Benchmark the Tokenization
-    auto startNLP = std::chrono::high_resolution_clock::now();
+    // 4. Start the scheduler to begin the cyclical operation of the system.
+    scheduler.startScheduler();
 
-    PaniniTokenizer::processSentence(prompt, secureTokenBuffer);
+    std::cout << "\n--- System has completed its scheduled operational cycles ---\n";
 
-    auto endNLP = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double, std::milli> timeNLP = endNLP - startNLP;
-
-    // 4. Display the resulting Mathematical Tokens
-    std::cout << "\n[Sattva] Token Stream Output (Ready for Vector ALU):\n[ ";
-    for(uint32_t token : secureTokenBuffer) {
-        std::cout << token << " ";
-    }
-    std::cout << "]\n";
-
-    std::cout << "\n[Result] Sentence tokenized in: " << timeNLP.count() << " ms\n\n";
-
-    // 5. Record to Akashic Records before shredding
-    std::cout << "[AkashicRecords] Recording token stream to persistent memory...\n";
-    AkashicRecords::recordState(secureTokenBuffer.data(), secureTokenBuffer.size());
-
-    // 6. Secure Hardware Wipe (Moksha)
-    std::cout << "[Moksha] Prompt ingested. Shredding token buffer to prevent memory leaks...\n";
-    GarudaShredder::dissolve(secureTokenBuffer.data(), secureTokenBuffer.size() * sizeof(uint32_t));
-    secureTokenBuffer.clear();
-
-    std::cout << "[Success] NLP pipeline clear. Awaiting next command.\n";
+    // 5. Demonstrate the memory components
+    DivineEarthlyKernels::Memory::YogaSutras::demonstrate();
+    DivineEarthlyKernels::Memory::Puranas::demonstrate();
+    
+    //The other files are not demonstrable and are not included
 
     return 0;
 }
