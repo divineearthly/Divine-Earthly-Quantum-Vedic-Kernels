@@ -1,4 +1,5 @@
 #include "include/compute/YogaAttention.h"
+#include "include/compute/NikhilamMath.h"
 
 void YogaAttention::applyAttention(
     const std::vector<uint32_t>& tokenStream,
@@ -12,7 +13,7 @@ void YogaAttention::applyAttention(
             // Here, we're conceptually applying a Vedic multiplication method.
             // Instead of a simple `*`, we use a function that represents this.
             // Note: This is a simplified representation.
-            resultMatrix[i * size + j] = VedicALU::nikhilamMultiply(tokenStream[i], attentionWeights[i * size + j]);
+            resultMatrix[i * size + j] = NikhilamMath::multiply(tokenStream[i], attentionWeights[i * size + j], 1000);
         }
     }
 }

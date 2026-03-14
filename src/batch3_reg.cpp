@@ -1,7 +1,7 @@
 #include <iostream>
-#include "core/SutraRegistry.h"
-#include "compute/Ekadhikena.h"
-#include "compute/PingalaChandaSutras.h"
+#include "include/core/SutraRegistry.h"
+#include "include/compute/Ekadhikena.h"
+#include "include/compute/PingalaChandaSutras.h"
 
 void registerBatch3() {
     SutraRegistry::registerSutra("ekadhikena_series", []() {

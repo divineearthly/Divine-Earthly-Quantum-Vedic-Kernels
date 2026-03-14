@@ -1,6 +1,6 @@
 #include <iostream>
-#include "core/SutraRegistry.h"
-#include "compute/BuddhiLogic.h"
+#include "include/core/SutraRegistry.h"
+#include "include/compute/BuddhiLogic.h"
 
 void registerBatch6() {
     SutraRegistry::registerSutra("buddhi_fuzzy", []() {

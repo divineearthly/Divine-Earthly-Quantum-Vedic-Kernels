@@ -1,7 +1,7 @@
 #include <iostream>
-#include "core/SutraRegistry.h"
-#include "compute/VedicALU.h"
-#include "compute/NikhilamMath.h"
+#include "include/core/SutraRegistry.h"
+#include "include/compute/VedicALU.h"
+#include "include/compute/NikhilamMath.h"
 
 void registerBatch1() {
     SutraRegistry::registerSutra("urdhva_tiryak", []() {

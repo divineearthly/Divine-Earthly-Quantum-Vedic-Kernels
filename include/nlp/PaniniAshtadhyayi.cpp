@@ -1,4 +1,4 @@
-#include "nlp/PaniniAshtadhyayi.h"
+#include "include/nlp/PaniniAshtadhyayi.h"
 
 namespace DivineEarthlyKernels::NLP {
 

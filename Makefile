@@ -52,17 +52,7 @@ SRC = main.cpp \
       include/security/DharmaIAM.cpp \
       include/security/Dhanurveda.cpp \
       include/security/Astras.cpp \
-      include/io/PranaRouter.cpp \
-      include/io/Pratishakhyas.cpp \
-      include/io/GandharvaVeda.cpp \
-      include/io/PaniniNLP.cpp \
-      include/nlp/NatyaShastra.cpp \
-      include/nlp/KamaSutra.cpp \
-      include/nlp/Vak.cpp \
-      include/nlp/VigyanBhairavTantra.cpp \
       include/nlp/PaniniAshtadhyayi.cpp \
-      include/nlp/Shiksha.cpp \
-      include/nlp/Nirukta.cpp \
       include/compute/SriYantraTensor.cpp \
       include/compute/SuryaSiddhanta.cpp \
       include/compute/ParavartyaLogic.cpp \

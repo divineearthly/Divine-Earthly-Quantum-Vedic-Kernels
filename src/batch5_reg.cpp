@@ -1,7 +1,7 @@
 #include <iostream>
-#include "core/SutraRegistry.h"
-#include "compute/SulbaSutras.h"
-#include "compute/SuryaSiddhanta.h"
+#include "include/core/SutraRegistry.h"
+#include "include/compute/SulbaSutras.h"
+#include "include/compute/SuryaSiddhanta.h"
 
 void registerBatch5() {
     SutraRegistry::registerSutra("sulba_geometry", []() {

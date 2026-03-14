@@ -1,4 +1,4 @@
-#include "compute/SuryaSiddhanta.h"
+#include "SuryaSiddhanta.h"
 #include <cmath>
 
 namespace DivineEarthlyKernels::Compute {

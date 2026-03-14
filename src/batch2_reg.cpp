@@ -1,7 +1,7 @@
 #include <iostream>
-#include "core/SutraRegistry.h"
-#include "compute/ParavartyaLogic.h"
-#include "compute/ShunyamAnyat.h"
+#include "include/core/SutraRegistry.h"
+#include "include/compute/ParavartyaLogic.h"
+#include "include/compute/ShunyamAnyat.h"
 
 void registerBatch2() {
     SutraRegistry::registerSutra("paravartya_logic", []() {

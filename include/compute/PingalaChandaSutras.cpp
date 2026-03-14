@@ -1,4 +1,4 @@
-#include "include/compute/PingalaChandaSutras.h"
+#include "PingalaChandaSutras.h"
 
 namespace DivineEarthlyKernels::Compute {
 

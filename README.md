@@ -1,40 +1,58 @@
+
 # Divine Earthly: Sovereign Bio-Digital Intelligence
 
 ![Speedups](benchmark_speedups.png)
 
 ## Executive Summary
-**Divine Earthly** is a high-performance, 64-level sovereign kernel architecture designed for extreme low-resource and mobile-first environments. By synthesizing ancient Vedic mathematical logic with modern C++17 SIMD systems programming, this framework optimizes Edge AI on ARM architectures by mapping cross-multiplication and combinatorial bit-logic directly to hardware registers.
+**Divine Earthly** is a high-performance, 64-level sovereign kernel architecture designed for extreme low-resource and mobile-first environments. This project consists of two main components:
 
-## Performance Proof: Deterministic Optimization
-The kernel utilizes **Urdhva Tiryagbhyam** (Vertical and Crosswise) and **Pingala Chanda Sutras** to bypass traditional nested-loop overhead.
+1.  **`divine_kernel`**: A C++ application that simulates a futuristic, spiritually-inspired operating system.
+2.  **`divine-earthly-web`**: A Laravel-based web application that provides a front-end for the Divine Kernel.
 
-### Verified Benchmarks
-| Kernel Category | Vedic Throughput | Speedup vs STL | Complexity |
-|:--- |:--- |:--- |:--- |
-| Matrix Tiled ALU | High (SIMD) | **1.42x** | O(N3) Cache-Aware |
-| Combinatorics (Meru) | Extreme (Bitwise) | **36.83x** | O(N) Parallel |
-| NLP Hashing (Panini) | Optimized | **1.10x** | O(L) Zero-Allocation |
-| Trig (Surya Jya) | 351M Ops/sec | **17.5x** | AVX2/NEON SIMD |
+This project synthesizes ancient Vedic mathematical logic with modern C++17 SIMD systems programming to optimize Edge AI on ARM architectures.
 
-**Sovereign Kernel V2.0 Benchmark:** 3.9 Billion Ops/sec
+## Documentation
 
-![Throughput](benchmark_throughput.png)
+- **[System Architecture and Usage](documentation.md)**: A detailed guide to the architecture, setup, and usage of both the Divine Kernel and the web application.
+- **[Performance Benchmarks](performance.md)**: Preliminary performance benchmarks for the Divine Kernel.
 
-## Compilation Guide
+## Compilation and Setup
 
-### Termux (Android)
+### Divine Kernel (`divine_kernel`)
+
+To compile the Divine Kernel, run the `make` command from the root of the project:
+
 ```bash
-pkg install clang binutils-is-llvm
-g++ -std=c++17 -O3 -march=native -I./include sovereign_inference_demo.cpp -o divine_kernel
+make
+```
+
+To run the kernel:
+
+```bash
 ./divine_kernel
 ```
 
-### Linux (x86_64/ARM64)
-```bash
-sudo apt install build-essential
-g++ -std=c++17 -O3 -mavx2 -ffast-math -I./include sovereign_inference_demo.cpp -o divine_kernel
-./divine_kernel
-```
+### Divine Earthly Web (`divine-earthly-web`)
+
+1.  **Install Dependencies**: Navigate to the `divine-earthly-web` directory and run:
+
+    ```bash
+    cd divine-earthly-web
+    composer install
+    npm install
+    ```
+
+2.  **Build Assets**: Build the front-end assets with:
+
+    ```bash
+    npm run build
+    ```
+
+3.  **Run the Application**: For local development, you can use the built-in Laravel development server:
+
+    ```bash
+    php artisan serve
+    ```
 
 ## Mission & Sovereignty
 **Developer:** Joydeep Das
