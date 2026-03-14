@@ -1,42 +1,24 @@
-#ifndef DIVINE_KERNEL_H
-#define DIVINE_KERNEL_H
+#ifndef DIVINEKERNEL_H
+#define DIVINEKERNEL_H
 
-#include <iostream>
-#include <string>
+#include <memory>
+#include "ThreeGunas.h"
+#include "SriYantraArchitecture.h"
 
-// Level 34: Upanishadic Polymorphism
-class IBrahman {
+class DivineKernel {
 public:
-    virtual ~IBrahman() = default;
-        virtual void execute(const std::string& input = "") = 0;
-        };
+    DivineKernel() : 
+        gunaController(std::make_unique<GunaEngine>()),
+        sriYantra(std::make_unique<SriYantra>()) {}
 
-        // Level 64: Moksha Protocol
-        class MokshaProtocol { 
-        public: 
-            static void terminate() { std::cout << "[Moksha] Absolute Termination Protocol Initiated. Memory freed.\n"; } 
-            };
+    void initialize() {
+        if(gunaController) gunaController->reportState();
+        if(sriYantra) sriYantra->projectHolographic();
+    }
 
-            // Level 47: Maya (Virtualization)
-            class MayaHypervisor {
-            public:
-                static void project(IBrahman& kernel, const std::string& input = "") {
-                        std::cout << "[Maya] Sandboxed Environment Projected...\n";
-                                kernel.execute(input);
-                                        std::cout << "[Maya] Terminating Projection...\n";
-                                            }
-                                            };
+private:
+    std::unique_ptr<GunaEngine> gunaController;
+    std::unique_ptr<SriYantra> sriYantra;
+};
 
-                                            class DivineKernel : public IBrahman {
-                                            public:
-                                                void execute(const std::string& input = "") override {
-                                                        std::cout << "[Bindu] Root Singularity established.\n";
-                                                                std::cout << "[Prana] Directing CPU voltage for input: " << input << "\n";
-                                                                        std::cout << "[Buddhi] Logic execution via Vedic ALU...\n";
-                                                                                std::cout << "[Gita] Action complete. Karmic Value calculated.\n";
-                                                                                    }
-                                                                                        ~DivineKernel() { MokshaProtocol::terminate(); }
-                                                                                        };
-
-                                                                                        #endif
-                                                                                        
+#endif

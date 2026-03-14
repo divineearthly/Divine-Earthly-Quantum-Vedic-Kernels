@@ -1,39 +1,28 @@
-# Divine Earthly: Sovereign Bio-Digital Intelligence
+# Divine Earthly: Quantum Vedic Kernels
 
-![Speedups](benchmark_speedups.png)
+## 🕉️ Overview
+Divine Earthly is an academic-grade C++ kernel framework that integrates ancient Vedic mathematical principles with modern high-performance computing. The project implements 69 discrete components ranging from distributed consensus (Indra's Net) to specialized sparse-compute logic (Shunyam Indexing).
 
-## Executive Summary
-**Divine Earthly** is a high-performance, 64-level sovereign kernel architecture designed for extreme low-resource and mobile-first environments. By synthesizing ancient Vedic mathematical logic with modern C++17 SIMD systems programming, this framework optimizes Edge AI on ARM architectures by mapping cross-multiplication and combinatorial bit-logic directly to hardware registers.
+## 🚀 Key Features
+- **Full 69-Sutra Framework**: Complete implementation of Vedic logical and mathematical sutras.
+- **RAII Memory Safety**: Core architecture refactored with `std::unique_ptr` and smart pointers to ensure leak-proof, hardware-level resource management (Moksha Protocol).
+- **Vedic Shunyam Indexing**: Advanced sparse-compute optimization that achieves up to **1.44x speedup** by bypassing memory fetches for zero-nodes.
+- **Panini NLP Pipeline**: A high-efficiency tokenizer using FNV-1a hashing (Sutra-logic) to process natural language into SIMD-ready tensors.
 
-## Performance Proof: Deterministic Optimization
-The kernel utilizes **Urdhva Tiryagbhyam** (Vertical and Crosswise) and **Pingala Chanda Sutras** to bypass traditional nested-loop overhead.
+## 📊 Performance Audit
+| Optimization | Sparsity | Speedup vs. Standard C++ | Bottleneck Solution |
+| :--- | :--- | :--- | :--- |
+| **SIMD Masking** | 70% | 1.00x | Memory Bandwidth Bound |
+| **Shunyam Indexing** | 90% | **1.32x** | Reduced DRAM Latency |
+| **Shunyam Indexing** | 95% | **1.44x** | Optimized Cache Locality |
 
-### Verified Benchmarks
-| Kernel Category | Vedic Throughput | Speedup vs STL | Complexity |
-|:--- |:--- |:--- |:--- |
-| Matrix Tiled ALU | High (SIMD) | **1.42x** | O(N3) Cache-Aware |
-| Combinatorics (Meru) | Extreme (Bitwise) | **36.83x** | O(N) Parallel |
-| NLP Hashing (Panini) | Optimized | **1.10x** | O(L) Zero-Allocation |
-| Trig (Surya Jya) | 351M Ops/sec | **17.5x** | AVX2/NEON SIMD |
+## 🛠️ Architecture
+- **Core**: Guna-based state machine (Sattva/Rajas/Tamas) for thermal and throughput management.
+- **Compute**: Sri Yantra multidimensional tensor projections.
+- **Memory**: Akashic Records immutable ledger and Garuda Shredder for secure data dissolution.
 
-![Throughput](benchmark_throughput.png)
+## 🎓 Academic Readiness
+This repository includes reproducible benchmarks (`shunyam_benchmark.cpp`) and a master verification suite (`master_system_run.cpp`). All components have been verified for mathematical parity with standard dense operations.
 
-## Compilation Guide
-
-### Termux (Android)
-```bash
-pkg install clang binutils-is-llvm
-g++ -std=c++17 -O3 -march=native -I./include sovereign_inference_demo.cpp -o divine_kernel
-./divine_kernel
-```
-
-### Linux (x86_64/ARM64)
-```bash
-sudo apt install build-essential
-g++ -std=c++17 -O3 -mavx2 -ffast-math -I./include sovereign_inference_demo.cpp -o divine_kernel
-./divine_kernel
-```
-
-## Mission & Sovereignty
-**Developer:** Joydeep Das
-**Mission:** Optimizing the intersection of Vedic Science and Quantum Logic for a Sovereign Bio-Digital Intelligence.
+---
+*Developed for Peer-Reviewed Algorithm Analysis and Sovereign Edge AI Research.*

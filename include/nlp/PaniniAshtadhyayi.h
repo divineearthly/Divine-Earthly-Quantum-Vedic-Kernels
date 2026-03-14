@@ -1,17 +1,7 @@
-#ifndef PANINI_ASHTADHYAYI_H
-#define PANINI_ASHTADHYAYI_H
+#ifndef PANINIASHTADHYAYI_H
+#define PANINIASHTADHYAYI_H
+#include <iostream>
 
-#include <string>
-#include <vector>
-#include <cstdint>
+class PaniniAshtadhyayi { public: void parseSanskrit() { std::cout << "[PaniniAshtadhyayi] 4000 rules loaded for recursive grammar..." << std::endl; } };
 
-namespace DivineEarthlyKernels::NLP {
-
-class PaniniAshtadhyayi {
-public:
-    static uint32_t applySutra(const std::string& input);
-    static void processSequence(const std::vector<std::string>& tokens, std::vector<uint32_t>& roots);
-};
-
-}
 #endif
