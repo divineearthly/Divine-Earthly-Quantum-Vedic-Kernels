@@ -1,38 +1,52 @@
 #include <iostream>
-#include "include/compute/VedicALU.h"
-#include "include/io/PaniniNLP.h"
-#include "include/io/PranaRouter.h"
-#include "include/core/ThreeGunas.h"
+#include <vector>
+#include <string>
 #include "include/memory/GarudaShredder.h"
+#include "include/compute/VedicMatrixBatch.h"
+#include "include/nlp/MultiLangPanini.h"
+
+using namespace DivineEarthlyKernels::NLP;
+
+enum Guna { TAMAS, RAJAS, SATTVA };
 
 int main() {
-    ThreeGunas systemState;
-    PranaRouter router;
+    std::cout << "--- SOVEREIGN EDGE AI INFERENCE DEMO (HINDI TEST) ---\n";
 
-    std::cout << "--- SOVEREIGN EDGE AI INFERENCE DEMO ---\n";
+    Guna state = RAJAS;
+    std::cout << "[ThreeGunas] Transitioned to RAJAS (I/O Mode) state.\n";
 
-    // Step 1: Ingest via Panini (Rajas State)
-    systemState.transitionTo(SystemGuna::RAJAS);
-    std::string prompt = "Activate Vedic Tensor Core";
-    std::vector<uint32_t> tokens;
-    PaniniTokenizer::processSentence(prompt, tokens);
+    // 1. Multilingual NLP Layer
+    std::vector<std::string> sanskritPrompt = {"Aham", "Brahmasmi"};
+    std::vector<std::string> englishPrompt = {"Sovereign", "Intelligence"};
+    std::vector<std::string> hindiPrompt = {"Satyameva", "Jayate"};
+    std::vector<uint32_t> roots;
 
-    // Step 2: Route to Compute (Sattva State)
-    router.dispatch([&]() {
-        systemState.transitionTo(SystemGuna::SATTVA);
-        size_t N = 256;
-        std::vector<float> A(N*N, 1.0f), B(N*N, 1.0f), C(N*N, 0.0f);
-        VedicALU::matrixMultiplyVedic(A.data(), B.data(), C.data(), N);
-        std::cout << "[Compute] Vedic Tensor multiplication completed on N=256.\n";
-    });
+    MultiLangPanini::processMultilingual(sanskritPrompt, roots, VachType::SANSKRIT);
+    MultiLangPanini::processMultilingual(englishPrompt, roots, VachType::ENGLISH);
+    MultiLangPanini::processMultilingual(hindiPrompt, roots, VachType::HINDI);
 
-    router.processNext();
+    std::cout << "[Panini] Generated " << roots.size() << " roots from Multilingual (SK/EN/HI) input.\n";
 
-    // Step 3: Secure Shredding (Moksha/Tamas State)
-    std::cout << "[Moksha] Task complete. Shredding sensitive buffers...\n";
-    GarudaShredder::dissolve(tokens.data(), tokens.size() * sizeof(uint32_t));
-    systemState.transitionTo(SystemGuna::TAMAS);
+    state = SATTVA;
+    std::cout << "[ThreeGunas] Transitioned to SATTVA (HPC Mode) state.\n";
 
-    std::cout << "\n[Success] Sovereign lifecycle completed under 50MB RAM.\n";
+    // 2. Compute Layer (Batch SIMD)
+    const int matrix_count = 256;
+    std::vector<int> A(matrix_count * 4, 5), B(matrix_count * 4, 2), C(matrix_count * 4, 0);
+
+    for(int i = 0; i < matrix_count; i += 4) {
+        VedicMatrixBatch::multiply2x2_x4(&A[i*4], &B[i*4], &C[i*4]);
+    }
+    std::cout << "[Compute] Vedic Batch SIMD multiplication completed.\n";
+
+    // 3. Memory Layer (Moksha Protocol)
+    std::cout << "[Moksha] Task complete. Dissolving sensitive buffers...\n";
+    GarudaShredder::dissolve(A.data(), A.size() * sizeof(int));
+    GarudaShredder::dissolve(roots.data(), roots.size() * sizeof(uint32_t));
+
+    state = TAMAS;
+    std::cout << "[ThreeGunas] Transitioned to TAMAS (Idle Mode) state.\n";
+    std::cout << "\n[Success] Hindi-integrated Sovereign lifecycle completed.\n";
+
     return 0;
 }
