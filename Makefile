@@ -1,10 +1,10 @@
-
 CXX = g++
 CXXFLAGS = -std=c++17 -O3 -I./
 
 # Source files
 SRC = main.cpp \
-      include/io/Tokenizer.cpp
+      AIAgent.cpp \
+      Tokenizer.cpp
 
 # Object files
 OBJ = $(SRC:.cpp=.o)

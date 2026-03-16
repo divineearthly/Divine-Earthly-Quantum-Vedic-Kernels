@@ -1,14 +1,12 @@
-
+#include <iostream>
 #include "AIAgent.h"
 
 int main() {
-    // Initialize the AI Agent
     AIAgent agent;
-
-    // Process a user prompt
-    std::string prompt = "This is a test prompt for the AI agent.";
-    std::cout << "Processing prompt: \"" << prompt << "\"" << std::endl;
-    agent.processPrompt(prompt);
-
+    std::string input;
+    std::cout << "Enter text: ";
+    std::getline(std::cin, input);
+    std::string response = agent.process(input);
+    std::cout << "Response: " << response << std::endl;
     return 0;
 }
