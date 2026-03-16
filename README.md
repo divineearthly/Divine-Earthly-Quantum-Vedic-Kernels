@@ -53,8 +53,6 @@ To run the kernel:
     ```bash
     php artisan serve
     ```
-git remote add origin <your-github-repository-url>
-git push -u origin release
 
 ## Mission & Sovereignty
 **Developer:** Joydeep Das

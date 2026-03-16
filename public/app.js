@@ -4,7 +4,18 @@ const responseDiv = document.getElementById('response');
 
 submitButton.addEventListener('click', () => {
     const text = input.value;
-    // This is where you would typically make an API call to your C++ backend.
-    // For this example, we'll just simulate the response.
     responseDiv.textContent = 'Processing: ' + text;
+
+    fetch('/process', {
+        method: 'POST',
+        body: text
+    })
+    .then(response => response.text())
+    .then(data => {
+        responseDiv.textContent = data;
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        responseDiv.textContent = 'Error: ' + error;
+    });
 });
